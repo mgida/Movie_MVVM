@@ -32,23 +32,31 @@ class MainActivity : AppCompatActivity() {
             when (dataState) {
 
                 is DataState.Success -> {
-                    progress_bar.visibility = View.GONE
-                    tvError.visibility = View.GONE
+                    displayProgressbar(isDisplayed = false)
+                    displayErrorMsg(isDisplayed = false)
                     movieAdapter.differ.submitList(dataState.data)
                 }
                 is DataState.Loading -> {
-                    progress_bar.visibility = View.VISIBLE
+                    displayProgressbar(isDisplayed = true)
                 }
                 is DataState.Error -> {
-                    progress_bar.visibility = View.GONE
+                    displayProgressbar(isDisplayed = false)
                     dataState.exception.message?.let {
                         Log.d(TAG, "Error occurred $it")
-                        tvError.visibility = View.VISIBLE
+                        displayErrorMsg(isDisplayed = true)
                         tvError.text = it
                     }
                 }
             }
         })
+    }
+
+    private fun displayProgressbar(isDisplayed: Boolean) {
+        progress_bar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+    private fun displayErrorMsg(isDisplayed: Boolean) {
+        tvError.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
     private fun initRecyclerView() {
