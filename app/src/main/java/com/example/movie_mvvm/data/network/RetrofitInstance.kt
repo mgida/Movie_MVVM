@@ -1,9 +1,8 @@
 package com.example.movie_mvvm.data.network
 
+import com.example.movie_mvvm.utils.Constant.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-const val BASE_URL = "https://api.themoviedb.org/3/"
 
 object RetrofitInstance {
 
@@ -14,7 +13,7 @@ object RetrofitInstance {
             .build()
     }
 
-     val movieService: MovieService by lazy {
+    val movieService: MovieService by lazy {
         retrofit.create(MovieService::class.java)
     }
 }

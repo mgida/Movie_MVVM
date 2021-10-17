@@ -3,27 +3,42 @@ package com.example.movie_mvvm.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
+import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter : PagingDataAdapter<MovieModel, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(currentMovie: MovieModel?) {
+            itemView.apply {
+                Glide.with(this)
+                    .load("$IMAGE_URL${currentMovie?.poster_path}")
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(imageView)
 
+                tvTitle.text = currentMovie?.title ?: "venom"
+                tvDate.text = currentMovie?.release_date ?: "10/16"
+            }
+        }
 
-    private val comparator = object : DiffUtil.ItemCallback<MovieModel>() {
-        override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel) =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel) =
-            oldItem.id == newItem.id
     }
-    val differ = AsyncListDiffer(this, comparator)
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieModel>() {
+            override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel) =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel) =
+                oldItem.id == newItem.id
+        }
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -34,20 +49,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val currentMovie: MovieModel? = differ.currentList[position]
-        holder.itemView.apply {
-
-            Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500${currentMovie?.poster_path}")
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(imageView)
-            tvTitle.text = currentMovie?.title ?: "venom"
-            tvDate.text = currentMovie?.release_date ?: "10/16"
-        }
+        val currentMovie: MovieModel? = getItem(position)
+        holder.bind(currentMovie)
     }
-
-    override fun getItemCount() = differ.currentList.size
 }
 
 
