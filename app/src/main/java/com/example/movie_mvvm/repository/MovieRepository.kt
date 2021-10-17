@@ -7,13 +7,13 @@ import com.example.movie_mvvm.data.MoviePagingDataSource
 
 class MovieRepository {
 
-    fun discoverMovies() =
+    fun getMovies(query:String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MoviePagingDataSource() }
+            pagingSourceFactory = { MoviePagingDataSource(query) }
         ).liveData
 }

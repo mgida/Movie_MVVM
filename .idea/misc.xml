@@ -6,6 +6,8 @@
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/activity_main.xml" value="0.2893258426966292" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_list_item.xml" value="0.33" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_load_state_adapter_footer.xml" value="0.25" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/popular_movie_list_item.xml" value="0.11548913043478261" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/top_rated_movie_list_item.xml" value="0.5" />
       </map>
     </option>
   </component>

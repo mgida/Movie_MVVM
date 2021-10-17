@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
-import kotlinx.android.synthetic.main.movie_list_item.view.*
+import kotlinx.android.synthetic.main.popular_movie_list_item.view.*
 
-class MovieAdapter : PagingDataAdapter<MovieModel, MovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+class PopularMovieAdapter : PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(currentMovie: MovieModel?) {
@@ -21,10 +21,7 @@ class MovieAdapter : PagingDataAdapter<MovieModel, MovieAdapter.MovieViewHolder>
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
-                    .into(imageView)
-
-                tvTitle.text = currentMovie?.title ?: "venom"
-                tvDate.text = currentMovie?.release_date ?: "10/16"
+                    .into(imageViewPopular)
             }
         }
 
@@ -44,7 +41,7 @@ class MovieAdapter : PagingDataAdapter<MovieModel, MovieAdapter.MovieViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.movie_list_item, parent, false)
+                .inflate(R.layout.popular_movie_list_item, parent, false)
         )
     }
 

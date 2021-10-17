@@ -4,4 +4,6 @@
     <string name="retry">retry</string>
     <string name="no_results_found">No Results Found</string>
     <string name="can_t_load_movies">can\'t load movies</string>
+    <string name="fake_title">Venom</string>
+    <string name="fake_date">10/17</string>
 </resources>
