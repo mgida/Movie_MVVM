@@ -2,8 +2,11 @@ package com.example.movie_mvvm
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.LoadState
 import com.example.movie_mvvm.adapter.MovieAdapter
+import com.example.movie_mvvm.adapter.MovieLoadStateAdapter
 import com.example.movie_mvvm.repository.MovieRepository
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
@@ -23,45 +26,43 @@ class MainActivity : AppCompatActivity() {
 
         initRecyclerView()
 
+        btnRetry.setOnClickListener {
+            movieAdapter.retry()
+        }
+
         viewModel.response.observe(this, {
             movieAdapter.submitData(lifecycle = lifecycle, it)
         })
 
-//        viewModel.movies.observe(this, { dataState ->
-//            when (dataState) {
-//
-//                is DataState.Success -> {
-//                    displayProgressbar(isDisplayed = false)
-//                    displayErrorMsg(isDisplayed = false)
-//                    movieAdapter.submitData(lifecycle = lifecycle, dataState.data)
-//                }
-//                is DataState.Loading -> {
-//                    displayProgressbar(isDisplayed = true)
-//                }
-//                is DataState.Error -> {
-//                    displayProgressbar(isDisplayed = false)
-//                    dataState.exception.message?.let {
-//                        Log.d(TAG, "Error occurred $it")
-//                        displayErrorMsg(isDisplayed = true)
-//                        tvError.text = it
-//                    }
-//                }
-//            }
-//        })
+        manageStates()
     }
 
-//    private fun displayProgressbar(isDisplayed: Boolean) {
-//        progress_bar.visibility = if (isDisplayed) View.VISIBLE else View.GONE
-//    }
-//
-//    private fun displayErrorMsg(isDisplayed: Boolean) {
-//        tvError.visibility = if (isDisplayed) View.VISIBLE else View.GONE
-//    }
+    private fun manageStates() {
+        movieAdapter.addLoadStateListener { loadState ->
+            progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            textViewError.isVisible = loadState.source.refresh is LoadState.Error
+            btnRetry.isVisible = loadState.source.refresh is LoadState.Error
+
+            if (loadState.source.refresh is LoadState.NotLoading &&
+                loadState.append.endOfPaginationReached && movieAdapter.itemCount < 1
+            ) {
+                textViewNoResult.isVisible = true
+                recyclerView.isVisible = false
+            } else {
+                textViewNoResult.isVisible = false
+            }
+
+        }
+    }
 
     private fun initRecyclerView() {
         movieAdapter = MovieAdapter()
         recyclerView.apply {
-            adapter = movieAdapter
+            adapter = movieAdapter.withLoadStateHeaderAndFooter(
+                footer = MovieLoadStateAdapter { movieAdapter.retry() },
+                header = MovieLoadStateAdapter { movieAdapter.retry() },
+            )
             setHasFixedSize(true)
         }
     }
