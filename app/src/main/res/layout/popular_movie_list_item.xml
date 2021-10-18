@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:layout_margin="16dp"
+    android:layout_height="350dp"
+    android:layout_margin="12dp"
     android:elevation="10dp"
     app:cardCornerRadius="12dp">
 
@@ -16,26 +15,4 @@
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_launcher_background" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvTitle"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/imageView"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:text="Venom" />-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvDate"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/imageView"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tvTitle"-->
-    <!--        tools:text="10/16/2021" />-->
 </androidx.cardview.widget.CardView>

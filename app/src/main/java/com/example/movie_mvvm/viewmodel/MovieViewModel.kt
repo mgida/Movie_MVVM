@@ -11,15 +11,27 @@ import com.example.movie_mvvm.repository.MovieRepository
 import com.example.movie_mvvm.utils.Constant.Companion.POPULAR
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.Constant.Companion.TOP_RATED
+import com.example.movie_mvvm.utils.Constant.Companion.UPCOMING
 
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     lateinit var responsePopular: LiveData<PagingData<MovieModel>>
     lateinit var responseTopRated: LiveData<PagingData<MovieModel>>
+    lateinit var responseUpcoming: LiveData<PagingData<MovieModel>>
 
     init {
         getPopularMovies()
         getTopRatedMovies()
+        getUpcomingMovies()
+
+    }
+
+    private fun getUpcomingMovies() {
+        try {
+            responseUpcoming = repository.getMovies(query = UPCOMING).cachedIn(viewModelScope)
+        } catch (e: Exception) {
+            Log.d(TAG, "error occurred $e")
+        }
     }
 
     private fun getTopRatedMovies() {
