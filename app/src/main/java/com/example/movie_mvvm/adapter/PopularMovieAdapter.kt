@@ -1,7 +1,6 @@
 package com.example.movie_mvvm.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -9,15 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
+import com.example.movie_mvvm.databinding.PopularMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
-import kotlinx.android.synthetic.main.popular_movie_list_item.view.*
 
-class PopularMovieAdapter : PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+class PopularMovieAdapter :
+    PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieViewHolder(private val binding: PopularMovieListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(currentMovie: MovieModel?) {
-            itemView.apply {
-                Glide.with(this)
+
+            binding.apply {
+                Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
@@ -40,8 +43,8 @@ class PopularMovieAdapter : PagingDataAdapter<MovieModel, PopularMovieAdapter.Mo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.popular_movie_list_item, parent, false)
+            PopularMovieListItemBinding
+                .inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

@@ -10,14 +10,14 @@ import com.example.movie_mvvm.adapter.MovieLoadStateAdapter
 import com.example.movie_mvvm.adapter.PopularMovieAdapter
 import com.example.movie_mvvm.adapter.TopRatedMovieAdapter
 import com.example.movie_mvvm.adapter.UpComingMovieAdapter
+import com.example.movie_mvvm.databinding.ActivityMainBinding
 import com.example.movie_mvvm.repository.MovieRepository
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private lateinit var popularMovieAdapter: PopularMovieAdapter
     private lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     private lateinit var upcomingMovieAdapter: UpComingMovieAdapter
@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val movieRepository = MovieRepository()
         val viewModelFactory = MovieViewModelFactory(movieRepository)
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         initRecyclerViewTopRated()
         initRecyclerViewUpComing()
 
-        btnRetry.setOnClickListener {
+        binding.btnRetry.setOnClickListener {
             popularMovieAdapter.retry()
             topRatedMovieAdapter.retry()
             upcomingMovieAdapter.retry()
@@ -61,16 +63,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun manageUpComingMoviesStates() {
         upcomingMovieAdapter.addLoadStateListener { loadState ->
-            recyclerViewUpComing.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.recyclerViewUpComing.isVisible =
+                loadState.source.refresh is LoadState.NotLoading
             manageViews(loadState)
 
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && upcomingMovieAdapter.itemCount < 1
             ) {
-                textViewNoResult.isVisible = true
-                recyclerViewUpComing.isVisible = false
+                binding.textViewNoResult.isVisible = true
+                binding.recyclerViewUpComing.isVisible = false
             } else {
-                textViewNoResult.isVisible = false
+                binding.textViewNoResult.isVisible = false
             }
 
         }
@@ -78,17 +81,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun manageTopRatedMoviesStates() {
         topRatedMovieAdapter.addLoadStateListener { loadState ->
-            recyclerViewTopRated.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.recyclerViewTopRated.isVisible =
+                loadState.source.refresh is LoadState.NotLoading
 
             manageViews(loadState)
 
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && topRatedMovieAdapter.itemCount < 1
             ) {
-                textViewNoResult.isVisible = true
-                recyclerViewTopRated.isVisible = false
+                binding.textViewNoResult.isVisible = true
+                binding.recyclerViewTopRated.isVisible = false
             } else {
-                textViewNoResult.isVisible = false
+                binding.textViewNoResult.isVisible = false
             }
 
         }
@@ -96,32 +100,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun managePopularMoviesStates() {
         popularMovieAdapter.addLoadStateListener { loadState ->
-            recyclerViewPopular.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.recyclerViewPopular.isVisible = loadState.source.refresh is LoadState.NotLoading
 
             manageViews(loadState)
 
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && popularMovieAdapter.itemCount < 1
             ) {
-                textViewNoResult.isVisible = true
-                recyclerViewPopular.isVisible = false
+                binding.textViewNoResult.isVisible = true
+                binding.recyclerViewPopular.isVisible = false
             } else {
-                textViewNoResult.isVisible = false
+                binding.textViewNoResult.isVisible = false
             }
 
         }
     }
 
     private fun manageViews(loadState: CombinedLoadStates) {
-        progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-
-        textViewError.isVisible = loadState.source.refresh is LoadState.Error
-        btnRetry.isVisible = loadState.source.refresh is LoadState.Error
+        binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        binding.textViewError.isVisible = loadState.source.refresh is LoadState.Error
+        binding.btnRetry.isVisible = loadState.source.refresh is LoadState.Error
     }
 
     private fun initRecyclerViewUpComing() {
         upcomingMovieAdapter = UpComingMovieAdapter()
-        recyclerViewUpComing.apply {
+        binding.recyclerViewUpComing.apply {
             adapter = upcomingMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { upcomingMovieAdapter.retry() },
                 header = MovieLoadStateAdapter { upcomingMovieAdapter.retry() },
@@ -132,7 +135,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerViewTopRated() {
         topRatedMovieAdapter = TopRatedMovieAdapter()
-        recyclerViewTopRated.apply {
+        binding.recyclerViewTopRated.apply {
             adapter = topRatedMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { topRatedMovieAdapter.retry() },
                 header = MovieLoadStateAdapter { topRatedMovieAdapter.retry() },
@@ -143,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerViewPopular() {
         popularMovieAdapter = PopularMovieAdapter()
-        recyclerViewPopular.apply {
+        binding.recyclerViewPopular.apply {
             adapter = popularMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { popularMovieAdapter.retry() },
                 header = MovieLoadStateAdapter { popularMovieAdapter.retry() },

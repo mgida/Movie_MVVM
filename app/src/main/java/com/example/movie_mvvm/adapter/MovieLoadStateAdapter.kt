@@ -1,28 +1,27 @@
 package com.example.movie_mvvm.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movie_mvvm.R
-import kotlinx.android.synthetic.main.movie_load_state_adapter_footer.view.*
+import com.example.movie_mvvm.databinding.MovieLoadStateAdapterFooterBinding
 
 class MovieLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<MovieLoadStateAdapter.LoadStateViewHolder>() {
 
-    inner class LoadStateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class LoadStateViewHolder(private val binding: MovieLoadStateAdapterFooterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
-            itemView.btnRetryFooter.setOnClickListener {
+            binding.btnRetryFooter.setOnClickListener {
                 retry.invoke()
             }
         }
 
         fun bind(loadState: LoadState) {
-            itemView.apply {
+            binding.apply {
                 progressBarFooter.isVisible = loadState is LoadState.Loading
                 textViewErrorFooter.isVisible = loadState !is LoadState.Loading
                 btnRetryFooter.isVisible = loadState !is LoadState.Loading
@@ -32,8 +31,11 @@ class MovieLoadStateAdapter(private val retry: () -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
         return LoadStateViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.movie_load_state_adapter_footer, parent, false)
+            MovieLoadStateAdapterFooterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
     }
 
