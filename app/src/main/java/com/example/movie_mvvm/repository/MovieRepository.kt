@@ -21,4 +21,7 @@ class MovieRepository {
     suspend fun getMovieReviews(id: Int, apiKey: String) =
         RetrofitInstance.movieService.getMovieReviews(id = id, apiKey = apiKey)
 
+    suspend fun getMovieCredits(id: Int, apiKey: String) =
+        RetrofitInstance.movieService.getMovieCredits(id = id, apiKey = apiKey)
+
 }

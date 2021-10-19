@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movie_mvvm.data.model.ReviewModel
+import com.example.movie_mvvm.data.model.review.ReviewModel
 import com.example.movie_mvvm.databinding.MovieReviewListItemBinding
 
 class MovieReviewAdapter : RecyclerView.Adapter<MovieReviewAdapter.MovieReviewViewHolder>() {

@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.data.model.MovieModel
-import com.example.movie_mvvm.data.model.ReviewModel
+import com.example.movie_mvvm.data.model.review.ReviewModel
 import com.example.movie_mvvm.repository.MovieRepository
 import com.example.movie_mvvm.utils.Constant.Companion.API_KEY
 import com.example.movie_mvvm.utils.Constant.Companion.POPULAR
@@ -27,6 +28,10 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private var _movieReviews: MutableLiveData<DataState<List<ReviewModel>>> =
         MutableLiveData<DataState<List<ReviewModel>>>()
     val movieReviews: LiveData<DataState<List<ReviewModel>>> get() = _movieReviews
+
+    private var _movieCast: MutableLiveData<DataState<List<CastModel>>> =
+        MutableLiveData<DataState<List<CastModel>>>()
+    val movieCast: LiveData<DataState<List<CastModel>>> get() = _movieCast
 
     init {
         getPopularMovies()
@@ -69,5 +74,19 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
             }
         }
     }
+
+    fun getMovieCredits(id: Int, apiKey: String = API_KEY) {
+        viewModelScope.launch {
+            _movieCast.postValue(DataState.Loading)
+            try {
+                val response = repository.getMovieCredits(id = id, apiKey = apiKey)
+                _movieCast.postValue(DataState.Success(response.cast))
+            } catch (e: Exception) {
+                Log.d(TAG, "error occurred $e")
+                _movieCast.postValue(DataState.Error(e))
+            }
+        }
+    }
+
 
 }

@@ -12,19 +12,45 @@
         android:layout_margin="16dp"
         tools:context=".MainActivity">
 
+        <TextView
+            android:id="@+id/tvPopular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/popular_movies"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/teal_700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPopular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewTopRated"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPopular"
+            app:layout_constraintVertical_bias="0.121"
             tools:listitem="@layout/popular_movie_list_item" />
+
+        <TextView
+            android:id="@+id/tvTopRated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/top_rated"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/teal_700"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewTopRated"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewPopular" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTopRated"
@@ -37,9 +63,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewUpComing"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPopular"
+            app:layout_constraintTop_toBottomOf="@+id/tvTopRated"
             tools:listitem="@layout/top_rated_movie_list_item" />
+
+        <TextView
+            android:id="@+id/tvUpComing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/upcoming"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/teal_700"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewUpComing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewTopRated" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUpComing"
@@ -52,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewTopRated"
+            app:layout_constraintTop_toBottomOf="@+id/tvUpComing"
             tools:listitem="@layout/top_rated_movie_list_item" />
 
         <ProgressBar

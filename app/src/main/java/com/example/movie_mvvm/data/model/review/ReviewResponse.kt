@@ -1,4 +1,4 @@
-package com.example.movie_mvvm.data.model
+package com.example.movie_mvvm.data.model.review
 
 data class ReviewResponse(
     val id: Int,
