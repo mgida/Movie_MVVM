@@ -11,11 +11,27 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.PopularMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
 
-class PopularMovieAdapter :
+class PopularMovieAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+
+    interface OnItemClickListener {
+        fun onItemClick(movieModel: MovieModel)
+    }
 
     inner class MovieViewHolder(private val binding: PopularMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentMovie = getItem(position)
+                    currentMovie?.let {
+                        listener.onItemClick(it)
+                    }
+                }
+            }
+        }
 
         fun bind(currentMovie: MovieModel?) {
 

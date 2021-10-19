@@ -6,4 +6,6 @@
     <string name="can_t_load_movies">can\'t load movies</string>
     <string name="fake_title">Venom</string>
     <string name="fake_date">10/17</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

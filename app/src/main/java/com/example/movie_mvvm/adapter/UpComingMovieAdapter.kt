@@ -42,7 +42,6 @@ class UpComingMovieAdapter :
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
             UpcomingMovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

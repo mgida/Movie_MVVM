@@ -4,10 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.movie_mvvm.data.MoviePagingDataSource
+import com.example.movie_mvvm.data.network.RetrofitInstance
 
 class MovieRepository {
 
-    fun getMovies(query:String) =
+    fun getMovies(query: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -16,4 +17,8 @@ class MovieRepository {
             ),
             pagingSourceFactory = { MoviePagingDataSource(query) }
         ).liveData
+
+    suspend fun getMovieReviews(id: Int, apiKey: String) =
+        RetrofitInstance.movieService.getMovieReviews(id = id, apiKey = apiKey)
+
 }

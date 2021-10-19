@@ -42,7 +42,6 @@ class TopRatedMovieAdapter :
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
             TopRatedMovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
