@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     android:orientation="vertical">
 
 
     <ImageView
         android:id="@+id/imageViewUpcoming"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:contentDescription="@null"
@@ -19,9 +19,11 @@
 
     <TextView
         android:id="@+id/textViewTitleUpcoming"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:maxEms="1"
+        android:maxLines="2"
         android:textColor="@color/black"
         tools:text="@string/fake_title" />
 

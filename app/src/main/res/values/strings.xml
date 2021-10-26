@@ -13,4 +13,6 @@
     <string name="popular_movies">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="upcoming">UpComing</string>
+    <string name="trailer">Trailer</string>
+    <string name="emptyReview">No Reviews Found</string>
 </resources>

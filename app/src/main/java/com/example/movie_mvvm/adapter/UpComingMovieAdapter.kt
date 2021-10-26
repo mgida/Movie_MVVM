@@ -11,11 +11,28 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.UpcomingMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant
 
-class UpComingMovieAdapter :
+class UpComingMovieAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MovieModel, UpComingMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+
+    interface OnItemClickListener {
+        fun onItemClick(movieModel: MovieModel)
+    }
 
     inner class MovieViewHolder(private val binding: UpcomingMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentMovie = getItem(position)
+                    currentMovie?.let {
+                        listener.onItemClick(it)
+                    }
+                }
+            }
+        }
+
         fun bind(currentMovie: MovieModel?) {
             binding.apply {
                 Glide.with(itemView)
@@ -24,7 +41,7 @@ class UpComingMovieAdapter :
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageViewUpcoming)
 
-                textViewTitleUpcoming.text = currentMovie?.title ?: "venom"
+                textViewTitleUpcoming.text = currentMovie?.original_title ?: "venom"
                 textViewDateUpcoming.text = currentMovie?.release_date ?: "10/17"
 
             }

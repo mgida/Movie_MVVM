@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="vertical"
-        tools:context=".fragment.MovieDetailFragment">
+        tools:context=".ui.fragment.MovieDetailFragment">
 
 
         <ImageView
@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/textViewDateDetail"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
             android:layout_marginBottom="6dp"
             tools:text="TextView" />
 
@@ -62,11 +62,23 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/teal_700" />
 
+        <TextView
+            android:id="@+id/tvEmptyReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/emptyReview"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:visibility="gone"
+            tools:text="@string/emptyReview"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReviews"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="5dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_review_list_item" />
@@ -92,11 +104,39 @@
             android:id="@+id/recyclerViewCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_cast_list_item" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/trailer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/teal_700" />
+
+        <ProgressBar
+            android:id="@+id/progressBarTrailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTrailer"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/movie_trailer_list_item" />
+
+
 
     </LinearLayout>
 </ScrollView>

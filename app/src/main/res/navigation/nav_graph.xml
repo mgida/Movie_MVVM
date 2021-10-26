@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.movie_mvvm.fragment.MainFragment"
+        android:name="com.example.movie_mvvm.ui.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -16,11 +16,23 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.movie_mvvm.fragment.MovieDetailFragment"
+        android:name="com.example.movie_mvvm.ui.fragment.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="movie"
             app:argType="com.example.movie_mvvm.data.model.MovieModel" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_movieCastFragment"
+            app:destination="@id/movieCastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieCastFragment"
+        android:name="com.example.movie_mvvm.ui.fragment.MovieCastFragment"
+        android:label="fragment_movie_cast"
+        tools:layout="@layout/fragment_movie_cast" >
+        <argument
+            android:name="cast"
+            app:argType="com.example.movie_mvvm.data.model.cast.CastModel" />
     </fragment>
 </navigation>

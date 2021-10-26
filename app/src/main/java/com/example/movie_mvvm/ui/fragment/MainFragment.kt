@@ -1,4 +1,4 @@
-package com.example.movie_mvvm.fragment
+package com.example.movie_mvvm.ui.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -20,7 +20,10 @@ import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
 
 class MainFragment :
-    Fragment(R.layout.fragment_main), PopularMovieAdapter.OnItemClickListener {
+    Fragment(R.layout.fragment_main),
+    PopularMovieAdapter.OnItemClickListener,
+    TopRatedMovieAdapter.OnItemClickListener,
+    UpComingMovieAdapter.OnItemClickListener {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -127,7 +130,7 @@ class MainFragment :
     }
 
     private fun initRecyclerViewUpComing() {
-        upcomingMovieAdapter = UpComingMovieAdapter()
+        upcomingMovieAdapter = UpComingMovieAdapter(this)
         binding.recyclerViewUpComing.apply {
             adapter = upcomingMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { upcomingMovieAdapter.retry() },
@@ -138,7 +141,7 @@ class MainFragment :
     }
 
     private fun initRecyclerViewTopRated() {
-        topRatedMovieAdapter = TopRatedMovieAdapter()
+        topRatedMovieAdapter = TopRatedMovieAdapter(this)
         binding.recyclerViewTopRated.apply {
             adapter = topRatedMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { topRatedMovieAdapter.retry() },

@@ -2,6 +2,7 @@ package com.example.movie_mvvm.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +11,36 @@ import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.TopRatedMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerDrawable
 
-class TopRatedMovieAdapter :
+class TopRatedMovieAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MovieModel, TopRatedMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+
+    interface OnItemClickListener {
+        fun onItemClick(movieModel: MovieModel)
+    }
+
 
     inner class MovieViewHolder(private val binding: TopRatedMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentMovie = getItem(position)
+                    currentMovie?.let {
+                        listener.onItemClick(it)
+                    }
+                }
+            }
+        }
+
+
         fun bind(currentMovie: MovieModel?) {
+
+
             binding.apply {
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
@@ -24,7 +48,7 @@ class TopRatedMovieAdapter :
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageViewTopRated)
 
-                textViewTitleTopRated.text = currentMovie?.title ?: "venom"
+                textViewTitleTopRated.text = currentMovie?.original_title ?: "venom"
                 textViewDateTopRated.text = currentMovie?.release_date ?: "10/17"
 
             }

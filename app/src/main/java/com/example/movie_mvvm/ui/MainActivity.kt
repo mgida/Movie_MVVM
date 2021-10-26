@@ -1,4 +1,4 @@
-package com.example.movie_mvvm
+package com.example.movie_mvvm.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
