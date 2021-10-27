@@ -1,6 +1,9 @@
 package com.example.movie_mvvm.ui.fragment
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -65,8 +68,9 @@ class MainFragment :
         managePopularMoviesStates()
         manageTopRatedMoviesStates()
         manageUpComingMoviesStates()
-    }
 
+        setHasOptionsMenu(true)
+    }
 
     private fun manageUpComingMoviesStates() {
         upcomingMovieAdapter.addLoadStateListener { loadState ->
@@ -164,6 +168,30 @@ class MainFragment :
 
     override fun onItemClick(movieModel: MovieModel) {
         val action = MainFragmentDirections.actionMainFragmentToMovieDetailFragment(movieModel)
+        findNavController().navigate(action)
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_movies_menu, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.search_movies_action -> {
+                navigateToSearchFragment()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun navigateToSearchFragment() {
+        val action = MainFragmentDirections.actionMainFragmentToMovieSearchFragment()
         findNavController().navigate(action)
     }
 

@@ -2,7 +2,6 @@ package com.example.movie_mvvm.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +10,6 @@ import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.TopRatedMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant
-import com.facebook.shimmer.Shimmer
-import com.facebook.shimmer.ShimmerDrawable
 
 class TopRatedMovieAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MovieModel, TopRatedMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
@@ -20,7 +17,6 @@ class TopRatedMovieAdapter(private val listener: OnItemClickListener) :
     interface OnItemClickListener {
         fun onItemClick(movieModel: MovieModel)
     }
-
 
     inner class MovieViewHolder(private val binding: TopRatedMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

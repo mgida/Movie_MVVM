@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.movie_mvvm.data.MoviePagingDataSource
+import com.example.movie_mvvm.data.MovieSearchPagingDataSource
 import com.example.movie_mvvm.data.network.RetrofitInstance
 
 class MovieRepository {
@@ -16,6 +17,17 @@ class MovieRepository {
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { MoviePagingDataSource(query) }
+        ).liveData
+
+
+    fun searchMovies(searchQuery: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { MovieSearchPagingDataSource(searchQuery) }
         ).liveData
 
     suspend fun getMovieReviews(id: Int, apiKey: String) =

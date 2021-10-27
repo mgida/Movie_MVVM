@@ -15,4 +15,11 @@
     <string name="upcoming">UpComing</string>
     <string name="trailer">Trailer</string>
     <string name="emptyReview">No Reviews Found</string>
+    <string name="fake_duration">1h 12min</string>
+    <string name="fake_director">sam mendes</string>
+    <string name="genre">Action</string>
+    <string name="movie_date">2020</string>
+    <string name="search">search</string>
+    <string name="no_search_yet">No Search Yet</string>
+    <string name="search_movies">Search movies</string>
 </resources>

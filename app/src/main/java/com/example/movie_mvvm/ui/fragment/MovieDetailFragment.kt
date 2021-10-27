@@ -130,11 +130,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                     showCastProgressbar(isDisplayed = false)
                     showCastRecyclerView(isDisplayed = true)
 
-                    val cast: List<CastModel>? = dataState.data.toList()
-
-                    cast?.let {
-                        castAdapter.differ.submitList(cast)
-                    }
+                    val cast: List<CastModel> = dataState.data.toList()
+                    castAdapter.differ.submitList(cast)
                 }
                 is DataState.Error -> {
 

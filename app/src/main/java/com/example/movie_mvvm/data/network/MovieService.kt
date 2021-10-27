@@ -35,4 +35,12 @@ interface MovieService {
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,
     ): TrailerResponse
+
+    @GET("search/movie/")
+    suspend fun searchMovies(
+        @Query("query") querySearch: String,
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
+    ): MovieResponse
+
 }

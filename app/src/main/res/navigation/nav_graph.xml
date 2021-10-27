@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_movieSearchFragment"
+            app:destination="@id/movieSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -34,5 +37,14 @@
         <argument
             android:name="cast"
             app:argType="com.example.movie_mvvm.data.model.cast.CastModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.example.movie_mvvm.ui.fragment.MovieSearchFragment"
+        android:label="fragment_movie_search"
+        tools:layout="@layout/fragment_movie_search" >
+        <action
+            android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>

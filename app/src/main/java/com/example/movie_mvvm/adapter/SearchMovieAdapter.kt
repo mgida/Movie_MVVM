@@ -8,18 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
-import com.example.movie_mvvm.databinding.PopularMovieListItemBinding
+import com.example.movie_mvvm.databinding.SearchMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
-import com.example.movie_mvvm.utils.ShimmerUtil.Companion.shimmerDrawable
 
-class PopularMovieAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+class SearchMovieAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<MovieModel, SearchMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
     interface OnItemClickListener {
         fun onItemClick(movieModel: MovieModel)
     }
 
-    inner class MovieViewHolder(private val binding: PopularMovieListItemBinding) :
+    inner class MovieViewHolder(private val binding: SearchMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -38,9 +37,14 @@ class PopularMovieAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
-                    .placeholder(shimmerDrawable)
+                    .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
-                    .into(imageViewPopular)
+                    .into(imageViewSearch)
+                tvMovieTitle.text = currentMovie?.original_title
+                tvMovieDirector.text = currentMovie?.release_date
+                tvMovieDuration.text = itemView.context.getString(R.string.fake_duration)
+                tvMovieGenre.text = itemView.context.getString(R.string.genre)
+                ratingBar.rating = (currentMovie?.vote_average)!!.toFloat()
             }
         }
 
@@ -59,7 +63,7 @@ class PopularMovieAdapter(private val listener: OnItemClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            PopularMovieListItemBinding
+            SearchMovieListItemBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }

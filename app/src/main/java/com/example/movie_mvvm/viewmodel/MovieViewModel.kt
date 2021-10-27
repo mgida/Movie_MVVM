@@ -28,6 +28,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     lateinit var responseTopRated: LiveData<PagingData<MovieModel>>
     lateinit var responseUpcoming: LiveData<PagingData<MovieModel>>
 
+    lateinit var searchResponse: LiveData<PagingData<MovieModel>>
+
     private var _movieReviews: MutableLiveData<DataState<MutableList<ReviewModel>>> =
         MutableLiveData<DataState<MutableList<ReviewModel>>>()
     val movieReviews: LiveData<DataState<MutableList<ReviewModel>>> get() = _movieReviews
@@ -68,6 +70,14 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         return data!!
     }
 
+    fun searchMovies(query: String) {
+        try {
+            searchResponse = repository.searchMovies(searchQuery = query).cachedIn(viewModelScope)
+        } catch (e: Exception) {
+            Log.d(TAG, "error occurred ${e.printStackTrace()}")
+        }
+    }
+
     fun getMovieReviews(id: Int, apiKey: String = API_KEY) {
         viewModelScope.launch {
             _movieReviews.postValue(DataState.Loading)
@@ -103,7 +113,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                 val response = repository.getMovieTrailers(id = id, apiKey = apiKey)
                 _movieTrailers.postValue(DataState.Success(response.trailers))
             } catch (e: Exception) {
-                Log.d(TAG, "error occurred ... ${e.printStackTrace()}")
+                Log.d(TAG, "error occurred ${e.printStackTrace()}")
                 _movieTrailers.postValue(DataState.Error(e))
             }
         }

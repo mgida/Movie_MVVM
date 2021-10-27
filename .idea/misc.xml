@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/drawable-v24/ic_search.xml" value="0.20092592592592592" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_main.xml" value="0.33" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_cast.xml" value="0.5" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_detail.xml" value="0.25" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_search.xml" value="0.15081521739130435" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_popular_movies.xml" value="0.1" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_top_rated_movies.xml" value="0.1" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_up_coming_movies.xml" value="0.1" />
@@ -18,9 +20,12 @@
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_review_list_item.xml" value="0.1" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_trailer_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/popular_movie_list_item.xml" value="0.11548913043478261" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/search_movie_list_item.xml" value="0.5" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/top_rated_movie_list_item.xml" value="0.33" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/upcoming_item.xml" value="0.10869565217391304" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/upcoming_movie_list_item.xml" value="0.33" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/menu/gallery_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/menu/search_movies_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
