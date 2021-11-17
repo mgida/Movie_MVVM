@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_200"
     tools:context=".ui.MainActivity">
 
 
@@ -24,106 +25,4 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent">-->
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        tools:context=".MainActivity">-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/recyclerViewPopular"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginBottom="10dp"-->
-    <!--            android:clipToPadding="false"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-    <!--            app:layout_constraintBottom_toTopOf="@+id/recyclerViewTopRated"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            tools:listitem="@layout/popular_movie_list_item" />-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/recyclerViewTopRated"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginBottom="8dp"-->
-    <!--            android:clipToPadding="false"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintBottom_toTopOf="@+id/recyclerViewUpComing"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPopular"-->
-    <!--            tools:listitem="@layout/top_rated_movie_list_item" />-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/recyclerViewUpComing"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginBottom="10dp"-->
-    <!--            android:clipToPadding="false"-->
-    <!--            android:orientation="horizontal"-->
-    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/recyclerViewTopRated"-->
-    <!--            tools:listitem="@layout/top_rated_movie_list_item" />-->
-
-    <!--        <ProgressBar-->
-    <!--            android:id="@+id/progressBar"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            tools:visibility="visible" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textViewNoResult"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/no_results_found"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            tools:visibility="visible" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/textViewError"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/can_t_load_movies"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            tools:visibility="visible" />-->
-
-    <!--        <Button-->
-    <!--            android:id="@+id/btnRetry"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/retry"-->
-    <!--            android:visibility="gone"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@id/textViewError"-->
-    <!--            tools:visibility="visible" />-->
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!--</ScrollView>-->
 

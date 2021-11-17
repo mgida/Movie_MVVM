@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -18,13 +17,12 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.FragmentMovieDetailBinding
-import com.example.movie_mvvm.repository.MovieRepository
+import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.ui.YoutubeActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.DataState
 import com.example.movie_mvvm.viewmodel.MovieViewModel
-import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     MovieTrailerAdapter.OnItemClickListener, MovieCastAdapter.OnItemClickListener {
@@ -33,23 +31,32 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private val binding get() = _binding!!
     private val args by navArgs<MovieDetailFragmentArgs>()
 
+    private lateinit var viewModel: MovieViewModel
     private lateinit var reviewAdapter: MovieReviewAdapter
     private lateinit var castAdapter: MovieCastAdapter
     private lateinit var trailerAdapter: MovieTrailerAdapter
+    private var isFav = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
+        viewModel = (activity as MainActivity).viewModel
 
-        val movieRepository = MovieRepository()
-        val viewModelFactory = MovieViewModelFactory(movieRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
+        val movie = args.movie
+
+        viewModel.selectMovieById(movie.id).observe(viewLifecycleOwner, {
+
+            if (it != null) {
+                Log.d("gida", "favv ${it.id}....")
+
+                isFav = true
+                binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
+            }
+        })
 
         initRecyclerViewReview()
         initRecyclerViewCast()
         initRecyclerViewTrailer()
-
-        val movie = args.movie
 
         populateUi(movie)
 
@@ -74,7 +81,36 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
             textViewTitleDetail.text = movie.title
             textViewDateDetail.text = movie.release_date
             textViewOverviewDetail.text = movie.overview
+
+            ivFav.setOnClickListener {
+                toggleFavMovies(movie)
+            }
+
         }
+    }
+
+    private fun toggleFavMovies(selectedMovie: MovieModel) {
+        isFav = !isFav
+        if (isFav) {
+            addMovieToFav(selectedMovie)
+        } else {
+            removeMovieFromFav(selectedMovie)
+        }
+    }
+
+    private fun removeMovieFromFav(selectedMovie: MovieModel) {
+        isFav = false
+        viewModel.deleteMovie(selectedMovie)
+        Toast.makeText(requireActivity(), "deleted...", Toast.LENGTH_SHORT).show()
+
+        binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_24)
+    }
+
+    private fun addMovieToFav(selectedMovie: MovieModel) {
+        isFav = true
+        viewModel.insertMovie(selectedMovie)
+        Toast.makeText(requireActivity(), "saved...", Toast.LENGTH_SHORT).show()
+        binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
     }
 
     private fun observeTrailers(viewModel: MovieViewModel) {
@@ -242,8 +278,13 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     }
 
     override fun onDestroyView() {
+        Log.d("gida", "call ....")
         super.onDestroyView()
         _binding = null
+        viewModel.movieCast.removeObservers(this)
+        viewModel.movieTrailers.removeObservers(this)
+        viewModel.movieReviews.removeObservers(this)
+
     }
 }
 

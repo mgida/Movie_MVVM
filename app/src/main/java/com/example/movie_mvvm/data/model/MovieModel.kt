@@ -1,14 +1,18 @@
 package com.example.movie_mvvm.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
+@Entity(tableName = "movies")
 data class MovieModel(
     val adult: Boolean,
     val backdrop_path: String,
-    val genre_ids: List<Int>,
+   // val genre_ids: List<Int>,
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val original_language: String,
     val original_title: String,

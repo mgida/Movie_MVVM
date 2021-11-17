@@ -22,4 +22,7 @@
     <string name="search">search</string>
     <string name="no_search_yet">No Search Yet</string>
     <string name="search_movies">Search movies</string>
+    <string name="fake_overview">awesome movie .. you gotta watch it !!</string>
+    <string name="favourites">Favourites</string>
+    <string name="your_fav_is_empty">your fav is empty !!</string>
 </resources>

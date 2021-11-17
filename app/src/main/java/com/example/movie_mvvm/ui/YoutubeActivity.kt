@@ -25,9 +25,11 @@ class YoutubeActivity : YouTubeBaseActivity() {
             override fun onInitializationSuccess(
                 provider: YouTubePlayer.Provider?,
                 player: YouTubePlayer?,
-                p2: Boolean
+                wasRestored: Boolean
             ) {
-                player?.loadVideo(yKey)
+                if (!wasRestored) {
+                    player?.loadVideo(yKey)
+                }
                 player?.play()
             }
 

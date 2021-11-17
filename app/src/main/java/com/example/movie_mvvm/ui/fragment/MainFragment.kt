@@ -7,8 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.example.movie_mvvm.R
@@ -18,9 +18,8 @@ import com.example.movie_mvvm.adapter.TopRatedMovieAdapter
 import com.example.movie_mvvm.adapter.UpComingMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMainBinding
-import com.example.movie_mvvm.repository.MovieRepository
+import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.viewmodel.MovieViewModel
-import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
 
 class MainFragment :
     Fragment(R.layout.fragment_main),
@@ -35,13 +34,13 @@ class MainFragment :
     private lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     private lateinit var upcomingMovieAdapter: UpComingMovieAdapter
 
+    private lateinit var viewModel: MovieViewModel
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
-
-        val movieRepository = MovieRepository()
-        val viewModelFactory = MovieViewModelFactory(movieRepository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
+        viewModel = (activity as MainActivity).viewModel
 
         initRecyclerViewPopular()
         initRecyclerViewTopRated()
@@ -174,30 +173,19 @@ class MainFragment :
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_movies_menu, menu)
+        inflater.inflate(R.menu.movies_menu, menu)
 
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-            R.id.search_movies_action -> {
-                navigateToSearchFragment()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun navigateToSearchFragment() {
-        val action = MainFragmentDirections.actionMainFragmentToMovieSearchFragment()
-        findNavController().navigate(action)
+        val navController = findNavController()
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.example.movie_mvvm.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.data.model.MovieResponse
 import com.example.movie_mvvm.data.network.RetrofitInstance
@@ -10,14 +11,18 @@ import com.example.movie_mvvm.utils.Constant.Companion.API_KEY
 import com.example.movie_mvvm.utils.Constant.Companion.STARTING_POSITION
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 
-class MoviePagingDataSource(private val query:String) : PagingSource<Int, MovieModel>() {
+class MoviePagingDataSource(private val query: String) : PagingSource<Int, MovieModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
 
         val position = params.key ?: STARTING_POSITION
         return try {
             val response: MovieResponse =
-                RetrofitInstance.movieService.getMovies(query =query ,apiKey = API_KEY, page = position)
+                RetrofitInstance.movieService.getMovies(
+                    query = query,
+                    apiKey = API_KEY,
+                    page = position
+                )
 
             val movies: List<MovieModel> = response.results
 

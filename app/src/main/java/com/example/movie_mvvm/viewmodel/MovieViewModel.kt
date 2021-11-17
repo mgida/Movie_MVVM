@@ -1,10 +1,7 @@
 package com.example.movie_mvvm.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.movie_mvvm.data.model.MovieModel
@@ -18,7 +15,6 @@ import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.Constant.Companion.TOP_RATED
 import com.example.movie_mvvm.utils.Constant.Companion.UPCOMING
 import com.example.movie_mvvm.utils.DataState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -27,6 +23,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     lateinit var responsePopular: LiveData<PagingData<MovieModel>>
     lateinit var responseTopRated: LiveData<PagingData<MovieModel>>
     lateinit var responseUpcoming: LiveData<PagingData<MovieModel>>
+
+    val favourites: LiveData<List<MovieModel>> = repository.favouriteMoviesRepo.asLiveData()
 
     lateinit var searchResponse: LiveData<PagingData<MovieModel>>
 
@@ -93,7 +91,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     }
 
     fun getMovieCredits(id: Int, apiKey: String = API_KEY) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _movieCast.postValue(DataState.Loading)
             try {
                 val response = repository.getMovieCredits(id = id, apiKey = apiKey)
@@ -119,5 +117,28 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
+    fun insertMovie(movieModel: MovieModel) {
+
+        viewModelScope.launch {
+            try {
+                repository.insertMovie(movieModel)
+            } catch (e: Exception) {
+                Log.d(TAG, "error occurred ${e.printStackTrace()}")
+            }
+        }
+    }
+
+    fun deleteMovie(movieModel: MovieModel) {
+
+        viewModelScope.launch {
+            try {
+                repository.deleteMovie(movieModel)
+            } catch (e: Exception) {
+                Log.d(TAG, "error occurred ${e.printStackTrace()}")
+            }
+        }
+    }
+
+    fun selectMovieById(id: Int) = repository.selectMovieById(id)
 }
 

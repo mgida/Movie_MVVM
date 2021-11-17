@@ -14,9 +14,8 @@ import com.example.movie_mvvm.adapter.MovieLoadStateAdapter
 import com.example.movie_mvvm.adapter.SearchMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMovieSearchBinding
-import com.example.movie_mvvm.repository.MovieRepository
+import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.viewmodel.MovieViewModel
-import com.example.movie_mvvm.viewmodel.MovieViewModelFactory
 import com.example.movie_mvvm.viewmodel.SharedViewModel
 
 class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
@@ -28,6 +27,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     private lateinit var sharedViewModel: SharedViewModel
 
     private lateinit var searchMovieAdapter: SearchMovieAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,10 +44,14 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
                     searchMovies(query)
                 }
             })
+//        val movieDao = MovieDatabase.invoke(requireContext()).getMovieDao()
+//        val movieRepository = MovieRepository(movieDao)
+//        val viewModelFactory = MovieViewModelFactory(movieRepository)
+//        viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
 
-        val movieRepository = MovieRepository()
-        val viewModelFactory = MovieViewModelFactory(movieRepository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
+        viewModel = (activity as MainActivity).viewModel
+
+        // viewModel.getMoviesFromDB()
         initRecyclerViewSearch()
 
         binding.btnRetrySearch.setOnClickListener {
@@ -122,6 +126,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
             MovieSearchFragmentDirections.actionMovieSearchFragmentToMovieDetailFragment(movieModel)
         findNavController().navigate(action)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -7,7 +7,7 @@
     android:layout_margin="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewFav"
         android:layout_width="150dp"
         android:layout_height="160dp"
         android:layout_margin="8dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageViewSearch"
+            android:id="@+id/imageViewSearchFav"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -27,82 +27,69 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tvMovieTitle"
+        android:id="@+id/tvMovieTitleFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/fake_title"
-        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/cardViewFav"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvMovieDuration"
+        android:id="@+id/tvMovieDurationFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/fake_duration"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+        app:layout_constraintStart_toStartOf="@+id/tvMovieTitleFav"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitleFav" />
 
     <TextView
-        android:id="@+id/tvMovieGenre"
+        android:id="@+id/tvMovieGenreFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/genre"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieDuration"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieDuration" />
+        app:layout_constraintStart_toStartOf="@+id/tvMovieDurationFav"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieDurationFav" />
 
     <TextView
-        android:id="@+id/tvMovieDirector"
+        android:id="@+id/tvMovieDirectorFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/fake_director"
-        app:layout_constraintStart_toEndOf="@+id/tvMovieGenre"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintStart_toEndOf="@+id/tvMovieGenreFav"
+        app:layout_constraintTop_toTopOf="@+id/guidelineFav" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewYearFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/movie_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvMovieDirector"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintStart_toEndOf="@+id/tvMovieDirectorFav"
+        app:layout_constraintTop_toTopOf="@+id/guidelineFav" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guidelineFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="87dp" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBarFav"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:numStars="5"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieGenre"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieGenre" />
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/imageButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:background="@color/white"-->
-<!--        android:contentDescription="@null"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/ic_baseline_bookmark_border_24" />-->
-
+        app:layout_constraintStart_toStartOf="@+id/tvMovieGenreFav"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieGenreFav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

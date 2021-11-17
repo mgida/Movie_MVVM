@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_movieSearchFragment"
             app:destination="@id/movieSearchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_movieFavouriteFragment"
+            app:destination="@id/movieFavouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -47,4 +50,9 @@
             android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/movieFavouriteFragment"
+        android:name="com.example.movie_mvvm.ui.fragment.MovieFavouriteFragment"
+        android:label="fragment_movie_favourite"
+        tools:layout="@layout/fragment_movie_favourite" />
 </navigation>

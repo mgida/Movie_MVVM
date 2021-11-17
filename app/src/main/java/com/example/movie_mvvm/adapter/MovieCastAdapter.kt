@@ -38,7 +38,7 @@ class MovieCastAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${castModel?.profile_path}")
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.color.white)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(ivCast)
                 textViewTitleCast.text = castModel?.original_name

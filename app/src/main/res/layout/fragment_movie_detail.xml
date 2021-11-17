@@ -6,125 +6,169 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        tools:context=".ui.fragment.MovieDetailFragment">
-
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/imageViewDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_height="350dp"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_background" />
+
+        <ImageButton
+            android:id="@+id/ivFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            app:layout_constraintEnd_toEndOf="@id/imageViewDetail"
+            app:layout_constraintTop_toTopOf="@+id/imageViewDetail"
+            app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
         <TextView
             android:id="@+id/textViewTitleDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            tools:text="TextView" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/imageViewDetail"
+            app:layout_constraintTop_toBottomOf="@id/imageViewDetail"
+            tools:text="@string/fake_title" />
+
 
         <TextView
             android:id="@+id/textViewDateDetail"
             android:layout_width="wrap_content"
-            android:layout_height="5dp"
-            android:layout_marginBottom="6dp"
-            tools:text="TextView" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleDetail"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDetail"
+            tools:text="@string/fake_date" />
 
         <TextView
             android:id="@+id/textViewOverviewDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            tools:text="TextView" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="@+id/textViewTitleDetail"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetail"
+            tools:text="@string/fake_overview" />
 
-        <ProgressBar
-            android:id="@+id/progressBarReview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            tools:visibility="visible" />
 
         <TextView
+            android:id="@+id/textViewReviewLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/reviews"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/teal_700"
+            app:layout_constraintStart_toStartOf="@id/textViewOverviewDetail"
+            app:layout_constraintTop_toBottomOf="@id/textViewOverviewDetail" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBarReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewReviewLabel" />
+
 
         <TextView
             android:id="@+id/tvEmptyReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/emptyReview"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:visibility="gone"
-            tools:text="@string/emptyReview"
-            tools:visibility="visible" />
+            app:layout_constraintStart_toStartOf="@id/textViewReviewLabel"
+            app:layout_constraintTop_toBottomOf="@id/textViewReviewLabel"
+            app:layout_constraintBottom_toTopOf="@id/textViewCastLabel"
+            tools:text="@string/emptyReview" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReviews"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="5dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/textViewReviewLabel"
+            app:layout_constraintTop_toBottomOf="@id/textViewReviewLabel"
             tools:listitem="@layout/movie_review_list_item" />
 
-        <ProgressBar
-            android:id="@+id/progressBarCast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone"
-            tools:visibility="visible" />
 
         <TextView
+            android:id="@+id/textViewCastLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/cast"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/teal_700"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewReviews"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewReviews" />
+
+        <ProgressBar
+            android:id="@+id/progressBarCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewCastLabel"
+            tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/textViewCastLabel"
+            app:layout_constraintTop_toBottomOf="@id/textViewCastLabel"
             tools:listitem="@layout/movie_cast_list_item" />
 
         <TextView
+            android:id="@+id/textViewTrailerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/trailer"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/teal_700" />
+            android:textColor="@color/teal_700"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewCast"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewCast" />
 
         <ProgressBar
             android:id="@+id/progressBarTrailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewTrailerLabel"
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -134,9 +178,150 @@
             android:layout_marginBottom="10dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/textViewTrailerLabel"
+            app:layout_constraintTop_toBottomOf="@id/textViewTrailerLabel"
             tools:listitem="@layout/movie_trailer_list_item" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="8dp"-->
+    <!--        android:orientation="vertical"-->
+    <!--        tools:context=".ui.fragment.MovieDetailFragment">-->
+
+
+    <!--        -->
+    <!--        -->
+    <!--        <ImageView-->
+    <!--            android:id="@+id/imageViewDetail"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="350dp"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:contentDescription="@null"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            app:srcCompat="@drawable/ic_launcher_background" />-->
+
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewTitleDetail"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="6dp"-->
+    <!--            tools:text="TextView" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewDateDetail"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="5dp"-->
+    <!--            android:layout_marginBottom="6dp"-->
+    <!--            tools:text="TextView" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewOverviewDetail"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            tools:text="TextView" />-->
+
+    <!--        <ProgressBar-->
+    <!--            android:id="@+id/progressBarReview"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:visibility="gone"-->
+    <!--            tools:visibility="visible" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:fontFamily="sans-serif-condensed-medium"-->
+    <!--            android:text="@string/reviews"-->
+    <!--            android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--            android:textColor="@color/teal_700" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tvEmptyReview"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:fontFamily="sans-serif-condensed-medium"-->
+    <!--            android:text="@string/emptyReview"-->
+    <!--            android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+    <!--            android:visibility="gone"-->
+    <!--            tools:text="@string/emptyReview"-->
+    <!--            tools:visibility="visible" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/recyclerViewReviews"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="200dp"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:clipToPadding="false"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            tools:listitem="@layout/movie_review_list_item" />-->
+
+    <!--        <ProgressBar-->
+    <!--            android:id="@+id/progressBarCast"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:visibility="gone"-->
+    <!--            tools:visibility="visible" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:fontFamily="sans-serif-condensed-medium"-->
+    <!--            android:text="@string/cast"-->
+    <!--            android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--            android:textColor="@color/teal_700" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/recyclerViewCast"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:clipToPadding="false"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            tools:listitem="@layout/movie_cast_list_item" />-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:fontFamily="sans-serif-condensed-medium"-->
+    <!--            android:text="@string/trailer"-->
+    <!--            android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+    <!--            android:textColor="@color/teal_700" />-->
+
+    <!--        <ProgressBar-->
+    <!--            android:id="@+id/progressBarTrailer"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:visibility="gone"-->
+    <!--            tools:visibility="visible" />-->
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/recyclerViewTrailer"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="100dp"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:clipToPadding="false"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            tools:listitem="@layout/movie_trailer_list_item" />-->
+
+
+    <!--    </LinearLayout>-->
 </ScrollView>
+
+
+
+
