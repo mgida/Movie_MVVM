@@ -28,13 +28,13 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
     lateinit var searchResponse: LiveData<PagingData<MovieModel>>
 
-    private var _movieReviews: MutableLiveData<DataState<MutableList<ReviewModel>>> =
-        MutableLiveData<DataState<MutableList<ReviewModel>>>()
-    val movieReviews: LiveData<DataState<MutableList<ReviewModel>>> get() = _movieReviews
+    private var _movieReviews: MutableLiveData<DataState<List<ReviewModel>>> =
+        MutableLiveData<DataState<List<ReviewModel>>>()
+    val movieReviews: LiveData<DataState<List<ReviewModel>>> get() = _movieReviews
 
-    private var _movieCast: MutableLiveData<DataState<MutableList<CastModel>>> =
-        MutableLiveData<DataState<MutableList<CastModel>>>()
-    val movieCast: LiveData<DataState<MutableList<CastModel>>> get() = _movieCast
+    private var _movieCast: MutableLiveData<DataState<List<CastModel>>> =
+        MutableLiveData<DataState<List<CastModel>>>()
+    val movieCast: LiveData<DataState<List<CastModel>>> get() = _movieCast
 
     private var _movieTrailers: MutableLiveData<DataState<List<TrailerModel>>> =
         MutableLiveData<DataState<List<TrailerModel>>>()

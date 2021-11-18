@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -37,14 +38,26 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private lateinit var trailerAdapter: MovieTrailerAdapter
     private var isFav = false
 
+    private var idObserved = MutableLiveData<Int>()
+    private lateinit var detailedMovie: MovieModel
+
+    private var checkedId: Int? = null
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
 
-        val movie = args.movie
 
-        viewModel.selectMovieById(movie.id).observe(viewLifecycleOwner, {
+        detailedMovie = args.movie
+        idObserved.postValue(detailedMovie.id)
+
+        idObserved.observe(viewLifecycleOwner, {
+            checkedId = it
+        })
+
+        viewModel.selectMovieById(detailedMovie.id).observe(viewLifecycleOwner, {
 
             if (it != null) {
                 Log.d("gida", "favv ${it.id}....")
@@ -54,20 +67,21 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
             }
         })
 
+        populateUi(detailedMovie)
+
         initRecyclerViewReview()
         initRecyclerViewCast()
         initRecyclerViewTrailer()
 
-        populateUi(movie)
 
-        viewModel.getMovieReviews(id = movie.id)
-        observeReviews(viewModel)
+        viewModel.getMovieReviews(id = detailedMovie.id)
+        observeReviews()
 
-        viewModel.getMovieCredits(id = movie.id)
-        observeCast(viewModel)
+        viewModel.getMovieCredits(id = detailedMovie.id)
+        observeCast()
 
-        viewModel.getMovieTrailers(id = movie.id)
-        observeTrailers(viewModel)
+        viewModel.getMovieTrailers(id = detailedMovie.id)
+        observeTrailers()
     }
 
     private fun populateUi(movie: MovieModel) {
@@ -113,7 +127,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
     }
 
-    private fun observeTrailers(viewModel: MovieViewModel) {
+    private fun observeTrailers() {
         viewModel.movieTrailers.observe(viewLifecycleOwner, { dataState ->
 
             when (dataState) {
@@ -123,12 +137,14 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                     showTrailerProgressbar(isDisplayed = true)
                 }
                 is DataState.Success -> {
+                    if (detailedMovie.id == checkedId) {
+                        showTrailerProgressbar(isDisplayed = false)
+                        showTrailerRecyclerView(isDisplayed = true)
 
-                    showTrailerProgressbar(isDisplayed = false)
-                    showTrailerRecyclerView(isDisplayed = true)
+                        val trailers = dataState.data
+                        trailerAdapter.differ.submitList(trailers)
+                    }
 
-                    val trailers = dataState.data
-                    trailerAdapter.differ.submitList(trailers)
                 }
                 is DataState.Error -> {
 
@@ -151,7 +167,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         binding.recyclerViewTrailer.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
-    private fun observeCast(viewModel: MovieViewModel) {
+    private fun observeCast() {
         viewModel.movieCast.observe(viewLifecycleOwner, { dataState ->
 
             when (dataState) {
@@ -163,11 +179,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                 }
                 is DataState.Success -> {
 
-                    showCastProgressbar(isDisplayed = false)
-                    showCastRecyclerView(isDisplayed = true)
+                    if (detailedMovie.id == checkedId) {
+                        showCastProgressbar(isDisplayed = false)
+                        showCastRecyclerView(isDisplayed = true)
 
-                    val cast: List<CastModel> = dataState.data.toList()
-                    castAdapter.differ.submitList(cast)
+                        val cast: List<CastModel> = dataState.data
+                        castAdapter.differ.submitList(cast)
+                    }
+
+
                 }
                 is DataState.Error -> {
 
@@ -179,7 +199,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         })
     }
 
-    private fun observeReviews(viewModel: MovieViewModel) {
+    private fun showCastProgressbar(isDisplayed: Boolean) {
+        binding.progressBarCast.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+    private fun showCastRecyclerView(isDisplayed: Boolean) {
+        binding.recyclerViewCast.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+    private fun observeReviews() {
         viewModel.movieReviews.observe(viewLifecycleOwner, { dataState ->
 
             when (dataState) {
@@ -188,20 +216,22 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                     showReviewProgressbar(isDisplayed = true)
                 }
                 is DataState.Success -> {
+                    if (detailedMovie.id == checkedId) {
+                        showReviewProgressbar(isDisplayed = false)
+                        showReviewRecyclerView(isDisplayed = true)
 
-                    showReviewProgressbar(isDisplayed = false)
-                    showReviewRecyclerView(isDisplayed = true)
+                        val reviews = dataState.data
+                        if (reviews.isNullOrEmpty()) {
 
-                    val reviews = dataState.data.toList()
-                    if (reviews.isNullOrEmpty()) {
+                            showReviewRecyclerView(isDisplayed = false)
+                            showEmptyReviewText(isDisplayed = true)
 
-                        showReviewRecyclerView(isDisplayed = false)
-                        showEmptyReviewText(isDisplayed = true)
-
-                    } else {
-                        showEmptyReviewText(isDisplayed = false)
-                        reviewAdapter.differ.submitList(reviews)
+                        } else {
+                            showEmptyReviewText(isDisplayed = false)
+                            reviewAdapter.differ.submitList(reviews)
+                        }
                     }
+
 
                 }
                 is DataState.Error -> {
@@ -213,17 +243,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         })
     }
 
-
-    private fun showCastProgressbar(isDisplayed: Boolean) {
-        binding.progressBarCast.visibility = if (isDisplayed) View.VISIBLE else View.GONE
-    }
-
     private fun showReviewProgressbar(isDisplayed: Boolean) {
         binding.progressBarReview.visibility = if (isDisplayed) View.VISIBLE else View.GONE
-    }
-
-    private fun showCastRecyclerView(isDisplayed: Boolean) {
-        binding.recyclerViewCast.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
     private fun showReviewRecyclerView(isDisplayed: Boolean) {
@@ -278,13 +299,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     }
 
     override fun onDestroyView() {
-        Log.d("gida", "call ....")
         super.onDestroyView()
         _binding = null
-        viewModel.movieCast.removeObservers(this)
-        viewModel.movieTrailers.removeObservers(this)
-        viewModel.movieReviews.removeObservers(this)
-
     }
 }
 

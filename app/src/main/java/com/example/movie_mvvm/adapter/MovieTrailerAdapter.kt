@@ -1,6 +1,5 @@
 package com.example.movie_mvvm.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.MovieTrailerListItemBinding
-import com.example.movie_mvvm.utils.Constant
 
 class MovieTrailerAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerViewHolder>() {
@@ -34,7 +32,6 @@ class MovieTrailerAdapter(private val listener: OnItemClickListener) :
         }
 
         fun bind(trailerModel: TrailerModel?) {
-            Log.d(Constant.TAG, "trailers ... $trailerModel .. ${trailerModel?.name}")
             binding.apply {
                 textViewTrailerName.text = trailerModel?.name
                 textViewTrailerSite.text = trailerModel?.site
