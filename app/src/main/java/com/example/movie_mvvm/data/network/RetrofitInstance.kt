@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-
     private val client = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)

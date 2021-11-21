@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:orientation="vertical">
 
     <TextView
@@ -10,15 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        tools:text="TextView" />
+        android:textColor="@color/opacityWhiteColor"
+        tools:text="nice movie" />
 
     <TextView
         android:id="@+id/textViewReviewAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:textColor="@color/purple_200"
-        tools:text="TextView" />
+        android:textColor="@color/opacityWhiteColor"
+        tools:text="tom hanks" />
 
     <View
         android:layout_width="match_parent"
@@ -27,6 +29,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:alpha="0.3"
-        android:background="@color/black" />
+        android:background="@color/white" />
 
 </LinearLayout>

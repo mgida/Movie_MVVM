@@ -1,6 +1,7 @@
 package com.example.movie_mvvm.ui.fragment
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -36,6 +37,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private lateinit var reviewAdapter: MovieReviewAdapter
     private lateinit var castAdapter: MovieCastAdapter
     private lateinit var trailerAdapter: MovieTrailerAdapter
+    private lateinit var typeface: Typeface
+
     private var isFav = false
 
     private var idObserved = MutableLiveData<Int>()
@@ -48,7 +51,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
-
+        typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
 
         detailedMovie = args.movie
         idObserved.postValue(detailedMovie.id)
@@ -67,6 +70,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
             }
         })
 
+        applyCustomFont()
+
         populateUi(detailedMovie)
 
         initRecyclerViewReview()
@@ -84,11 +89,19 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         observeTrailers()
     }
 
+    private fun applyCustomFont() {
+        binding.textViewReviewLabel.typeface = typeface
+        binding.textViewCastLabel.typeface = typeface
+        binding.textViewTrailerLabel.typeface = typeface
+        binding.textViewTitleDetail.typeface = typeface
+        binding.textViewDateDetail.typeface = typeface
+        binding.textViewOverviewDetail.typeface = typeface
+    }
+
     private fun populateUi(movie: MovieModel) {
         binding.apply {
             Glide.with(binding.root)
                 .load("${Constant.IMAGE_URL}${movie.poster_path}")
-                .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(imageViewDetail)
 
@@ -257,7 +270,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
     private fun initRecyclerViewTrailer() {
 
-        trailerAdapter = MovieTrailerAdapter(this)
+        trailerAdapter = MovieTrailerAdapter(typeface, this)
         binding.recyclerViewTrailer.apply {
             adapter = trailerAdapter
             setHasFixedSize(true)
@@ -265,7 +278,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     }
 
     private fun initRecyclerViewReview() {
-        reviewAdapter = MovieReviewAdapter()
+        reviewAdapter = MovieReviewAdapter(typeface)
         binding.recyclerViewReviews.apply {
             adapter = reviewAdapter
             setHasFixedSize(true)
@@ -273,7 +286,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     }
 
     private fun initRecyclerViewCast() {
-        castAdapter = MovieCastAdapter(this)
+        castAdapter = MovieCastAdapter(typeface, this)
         binding.recyclerViewCast.apply {
             adapter = castAdapter
             setHasFixedSize(true)

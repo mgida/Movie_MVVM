@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -19,6 +20,7 @@ import com.example.movie_mvvm.adapter.UpComingMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMainBinding
 import com.example.movie_mvvm.ui.MainActivity
+import com.example.movie_mvvm.utils.Constant.Companion.AntiqueFont
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 
 class MainFragment :
@@ -33,6 +35,7 @@ class MainFragment :
     private lateinit var popularMovieAdapter: PopularMovieAdapter
     private lateinit var topRatedMovieAdapter: TopRatedMovieAdapter
     private lateinit var upcomingMovieAdapter: UpComingMovieAdapter
+    private lateinit var typeface: Typeface
 
     private lateinit var viewModel: MovieViewModel
 
@@ -41,6 +44,9 @@ class MainFragment :
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainBinding.bind(view)
         viewModel = (activity as MainActivity).viewModel
+
+        typeface = Typeface.createFromAsset(requireActivity().assets, AntiqueFont)
+        applyCustomFont()
 
         initRecyclerViewPopular()
         initRecyclerViewTopRated()
@@ -53,14 +59,17 @@ class MainFragment :
         }
 
         viewModel.responsePopular.observe(viewLifecycleOwner, {
+            hidePopularShimmer()
             popularMovieAdapter.submitData(lifecycle = viewLifecycleOwner.lifecycle, it)
         })
 
         viewModel.responseTopRated.observe(viewLifecycleOwner, {
+            hideTopRatedShimmer()
             topRatedMovieAdapter.submitData(lifecycle = viewLifecycleOwner.lifecycle, it)
         })
 
         viewModel.responseUpcoming.observe(viewLifecycleOwner, {
+            hideUpComingShimmer()
             upcomingMovieAdapter.submitData(lifecycle = viewLifecycleOwner.lifecycle, it)
         })
 
@@ -69,6 +78,30 @@ class MainFragment :
         manageUpComingMoviesStates()
 
         setHasOptionsMenu(true)
+    }
+
+    private fun applyCustomFont() {
+        binding.tvPopular.typeface = typeface
+        binding.tvTopRated.typeface = typeface
+        binding.tvUpComing.typeface = typeface
+    }
+
+    private fun hidePopularShimmer() {
+        binding.shimmerFrameLayoutPopular.stopShimmer()
+        binding.shimmerFrameLayoutPopular.visibility = View.GONE
+        binding.recyclerViewPopular.visibility = View.VISIBLE
+    }
+
+    private fun hideUpComingShimmer() {
+        binding.shimmerFrameLayoutUpComing.stopShimmer()
+        binding.shimmerFrameLayoutUpComing.visibility = View.GONE
+        binding.recyclerViewUpComing.visibility = View.VISIBLE
+    }
+
+    private fun hideTopRatedShimmer() {
+        binding.shimmerFrameLayoutTopRated.stopShimmer()
+        binding.shimmerFrameLayoutTopRated.visibility = View.GONE
+        binding.recyclerViewTopRated.visibility = View.VISIBLE
     }
 
     private fun manageUpComingMoviesStates() {
@@ -128,12 +161,15 @@ class MainFragment :
 
     private fun manageViews(loadState: CombinedLoadStates) {
         binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        binding.shimmerFrameLayoutPopular.isVisible = loadState.source.refresh is LoadState.Loading
+        binding.shimmerFrameLayoutTopRated.isVisible = loadState.source.refresh is LoadState.Loading
+        binding.shimmerFrameLayoutUpComing.isVisible = loadState.source.refresh is LoadState.Loading
         binding.textViewError.isVisible = loadState.source.refresh is LoadState.Error
         binding.btnRetry.isVisible = loadState.source.refresh is LoadState.Error
     }
 
     private fun initRecyclerViewUpComing() {
-        upcomingMovieAdapter = UpComingMovieAdapter(this)
+        upcomingMovieAdapter = UpComingMovieAdapter(typeface, this)
         binding.recyclerViewUpComing.apply {
             adapter = upcomingMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { upcomingMovieAdapter.retry() },
@@ -144,7 +180,7 @@ class MainFragment :
     }
 
     private fun initRecyclerViewTopRated() {
-        topRatedMovieAdapter = TopRatedMovieAdapter(this)
+        topRatedMovieAdapter = TopRatedMovieAdapter(typeface, this)
         binding.recyclerViewTopRated.apply {
             adapter = topRatedMovieAdapter.withLoadStateHeaderAndFooter(
                 footer = MovieLoadStateAdapter { topRatedMovieAdapter.retry() },
@@ -170,7 +206,6 @@ class MainFragment :
         findNavController().navigate(action)
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.movies_menu, menu)
@@ -182,10 +217,24 @@ class MainFragment :
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerFrameLayoutPopular.startShimmer()
+        binding.shimmerFrameLayoutTopRated.startShimmer()
+        binding.shimmerFrameLayoutUpComing.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerFrameLayoutPopular.stopShimmer()
+        binding.shimmerFrameLayoutTopRated.stopShimmer()
+        binding.shimmerFrameLayoutUpComing.stopShimmer()
+        super.onPause()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

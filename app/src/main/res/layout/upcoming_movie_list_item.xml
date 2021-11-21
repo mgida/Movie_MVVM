@@ -3,19 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:layout_margin="8dp"
+    android:background="@color/backgroundColor"
     android:orientation="vertical">
 
 
-    <ImageView
-        android:id="@+id/imageViewUpcoming"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="130dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        android:elevation="10dp"
+        app:cardCornerRadius="12dp">
+
+        <ImageView
+            android:id="@+id/imageViewUpcoming"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/backgroundColor"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/textViewTitleUpcoming"
@@ -24,14 +35,15 @@
         android:layout_marginBottom="4dp"
         android:maxEms="1"
         android:maxLines="2"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         tools:text="@string/fake_title" />
 
     <TextView
         android:id="@+id/textViewDateUpcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/opacityWhiteColor"
+        android:alpha="0.7"
         tools:text="@string/fake_date" />
 
 </LinearLayout>

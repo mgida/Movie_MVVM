@@ -22,8 +22,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:background="@color/purple_500"
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -33,6 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/fake_title"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/fake_duration"
-        android:textColor="@color/white"
+        android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toStartOf="@+id/tvMovieTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
 
@@ -52,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/genre"
+        android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toStartOf="@+id/tvMovieDuration"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieDuration" />
 
@@ -61,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/fake_director"
+        android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toEndOf="@+id/tvMovieGenre"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
@@ -69,6 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textColor="@color/opacityWhiteColor"
         android:text="@string/movie_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvMovieDirector"

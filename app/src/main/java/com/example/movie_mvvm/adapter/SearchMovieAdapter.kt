@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.adapter
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -12,6 +13,7 @@ import com.example.movie_mvvm.databinding.SearchMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
 
 class SearchMovieAdapter(
+    private val typeface: Typeface,
     private val listener: OnItemClickListener,
 //    private val viewModel: MovieViewModel,
 //    private val lifecycleOwner: LifecycleOwner
@@ -27,6 +29,11 @@ class SearchMovieAdapter(
 //        private var isFav = false
 
         init {
+            binding.tvMovieTitle.typeface = typeface
+            binding.tvMovieDirector.typeface = typeface
+            binding.tvMovieDuration.typeface = typeface
+            binding.tvMovieGenre.typeface = typeface
+
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -52,7 +59,7 @@ class SearchMovieAdapter(
 //                })
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
-                    .placeholder(R.color.white)
+                    .placeholder(R.color.purple_500)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageViewSearch)
                 tvMovieTitle.text = currentMovie?.original_title

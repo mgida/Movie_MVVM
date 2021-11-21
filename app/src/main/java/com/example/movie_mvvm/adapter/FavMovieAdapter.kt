@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.adapter
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -12,7 +13,7 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FavMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant
 
-class FavMovieAdapter(private val listener: OnItemClickListener) :
+class FavMovieAdapter(private val typeface: Typeface, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<FavMovieAdapter.FavMovieViewHolder>() {
 
     interface OnItemClickListener {
@@ -24,6 +25,12 @@ class FavMovieAdapter(private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
+
+            binding.tvMovieTitleFav.typeface = typeface
+            binding.tvMovieDirectorFav.typeface = typeface
+            binding.tvMovieDurationFav.typeface = typeface
+            binding.tvMovieGenreFav.typeface = typeface
+
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -40,7 +47,6 @@ class FavMovieAdapter(private val listener: OnItemClickListener) :
 
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
-                    .placeholder(R.color.white)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageViewSearchFav)
                 tvMovieTitleFav.text = currentMovie?.original_title

@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.movie_mvvm.adapter.FavMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMovieFavouriteBinding
 import com.example.movie_mvvm.ui.MainActivity
+import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -21,6 +23,7 @@ class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
     private var _binding: FragmentMovieFavouriteBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: MovieViewModel
+    private lateinit var typeface: Typeface
 
 
     //  private lateinit var favMovieAdapter: FavMovieAdapter
@@ -30,10 +33,11 @@ class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
         _binding = FragmentMovieFavouriteBinding.bind(view)
 
         viewModel = (activity as MainActivity).viewModel
+        typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
 
         // initRecyclerViewFav()
 
-        val favMovieAdapter = FavMovieAdapter(this)
+        val favMovieAdapter = FavMovieAdapter(typeface, this)
         binding.recyclerViewMovieFav.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = favMovieAdapter

@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.adapter
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -8,12 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_mvvm.data.model.review.ReviewModel
 import com.example.movie_mvvm.databinding.MovieReviewListItemBinding
 
-class MovieReviewAdapter : RecyclerView.Adapter<MovieReviewAdapter.MovieReviewViewHolder>() {
+class MovieReviewAdapter(private val typeface: Typeface) :
+    RecyclerView.Adapter<MovieReviewAdapter.MovieReviewViewHolder>() {
 
-    class MovieReviewViewHolder(private val binding: MovieReviewListItemBinding) :
+    inner class MovieReviewViewHolder(private val binding: MovieReviewListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.textViewReview.typeface = typeface
+            binding.textViewReviewAuthor.typeface = typeface
+        }
+
         fun bind(movieReview: ReviewModel) {
             binding.apply {
+
                 textViewReview.text = movieReview.content
                 textViewReviewAuthor.text = movieReview.author
             }

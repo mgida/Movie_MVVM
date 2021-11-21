@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SearchView
@@ -15,6 +16,7 @@ import com.example.movie_mvvm.adapter.SearchMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMovieSearchBinding
 import com.example.movie_mvvm.ui.MainActivity
+import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.SharedViewModel
 
@@ -27,6 +29,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     private lateinit var sharedViewModel: SharedViewModel
 
     private lateinit var searchMovieAdapter: SearchMovieAdapter
+    private lateinit var typeface: Typeface
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,6 +37,8 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
         _binding = FragmentMovieSearchBinding.bind(view)
         binding.searchView.setIconifiedByDefault(false)
         binding.searchView.requestFocus()
+
+        typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
@@ -112,7 +117,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     }
 
     private fun initRecyclerViewSearch() {
-        searchMovieAdapter = SearchMovieAdapter(this)
+        searchMovieAdapter = SearchMovieAdapter(typeface, this)
         binding.recyclerViewSearch.apply {
             adapter = searchMovieAdapter.withLoadStateFooter(
                 footer = MovieLoadStateAdapter { searchMovieAdapter.retry() },

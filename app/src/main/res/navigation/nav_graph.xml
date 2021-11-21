@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MainFragment"
-        android:label="fragment_main"
+        android:label="IMDB"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_movieDetailFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieDetailFragment"
-        android:label="fragment_movie_detail"
+        android:label="Movie Detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
             android:name="movie"
@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/movieCastFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieCastFragment"
-        android:label="fragment_movie_cast"
+        android:label="Cast Detail"
         tools:layout="@layout/fragment_movie_cast" >
         <argument
             android:name="cast"
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/movieSearchFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieSearchFragment"
-        android:label="fragment_movie_search"
+        android:label="Search"
         tools:layout="@layout/fragment_movie_search" >
         <action
             android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
@@ -53,6 +53,6 @@
     <fragment
         android:id="@+id/movieFavouriteFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieFavouriteFragment"
-        android:label="fragment_movie_favourite"
+        android:label="Favourites"
         tools:layout="@layout/fragment_movie_favourite" />
 </navigation>

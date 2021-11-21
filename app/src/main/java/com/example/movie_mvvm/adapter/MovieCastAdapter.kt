@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.adapter
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -11,7 +12,7 @@ import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.databinding.MovieCastListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
 
-class MovieCastAdapter(private val listener: OnItemClickListener) :
+class MovieCastAdapter(private val typeface: Typeface, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<MovieCastAdapter.MovieCastViewHolder>() {
 
     interface OnItemClickListener {
@@ -23,6 +24,10 @@ class MovieCastAdapter(private val listener: OnItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
+
+            binding.textViewTitleCast.typeface = typeface
+            binding.textViewPopularityCast.typeface = typeface
+
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -38,9 +43,9 @@ class MovieCastAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${castModel?.profile_path}")
-                    .placeholder(R.color.white)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(ivCast)
+
                 textViewTitleCast.text = castModel?.original_name
                 textViewPopularityCast.text = castModel?.popularity.toString()
             }

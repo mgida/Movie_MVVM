@@ -2,7 +2,7 @@
 <resources>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">Poppins</item>
     </style>
 
 </resources>

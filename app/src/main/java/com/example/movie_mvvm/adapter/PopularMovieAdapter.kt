@@ -10,7 +10,6 @@ import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.PopularMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
-import com.example.movie_mvvm.utils.ShimmerUtil.Companion.shimmerDrawable
 
 class PopularMovieAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MovieModel, PopularMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
@@ -38,7 +37,6 @@ class PopularMovieAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
-                    .placeholder(shimmerDrawable)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageViewPopular)
             }

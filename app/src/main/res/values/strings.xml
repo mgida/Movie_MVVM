@@ -11,8 +11,8 @@
     <string name="reviews">Reviews</string>
     <string name="cast">Cast</string>
     <string name="popular_movies">Popular</string>
-    <string name="top_rated">Top Rated</string>
-    <string name="upcoming">UpComing</string>
+    <string name="top_rated">Top rated</string>
+    <string name="upcoming">Upcoming</string>
     <string name="trailer">Trailer</string>
     <string name="emptyReview">No Reviews Found</string>
     <string name="fake_duration">1h 12min</string>
@@ -25,4 +25,5 @@
     <string name="fake_overview">awesome movie .. you gotta watch it !!</string>
     <string name="favourites">Favourites</string>
     <string name="your_fav_is_empty">your fav is empty !!</string>
+    <string name="moviesLabel">Movies</string>
 </resources>
