@@ -25,6 +25,7 @@ import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.DataState
 import com.example.movie_mvvm.viewmodel.MovieViewModel
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     MovieTrailerAdapter.OnItemClickListener, MovieCastAdapter.OnItemClickListener {
@@ -40,12 +41,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private lateinit var typeface: Typeface
 
     private var isFav = false
-
     private var idObserved = MutableLiveData<Int>()
     private lateinit var detailedMovie: MovieModel
-
     private var checkedId: Int? = null
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,10 +59,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         })
 
         viewModel.selectMovieById(detailedMovie.id).observe(viewLifecycleOwner, {
-
             if (it != null) {
-                Log.d("gida", "favv ${it.id}....")
-
                 isFav = true
                 binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
             }
@@ -74,10 +69,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
         populateUi(detailedMovie)
 
-        initRecyclerViewReview()
-        initRecyclerViewCast()
-        initRecyclerViewTrailer()
-
+        initReviewRecyclerView()
+        initCastRecyclerView()
+        initTrailerRecyclerView()
 
         viewModel.getMovieReviews(id = detailedMovie.id)
         observeReviews()
@@ -87,33 +81,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
         viewModel.getMovieTrailers(id = detailedMovie.id)
         observeTrailers()
-    }
-
-    private fun applyCustomFont() {
-        binding.textViewReviewLabel.typeface = typeface
-        binding.textViewCastLabel.typeface = typeface
-        binding.textViewTrailerLabel.typeface = typeface
-        binding.textViewTitleDetail.typeface = typeface
-        binding.textViewDateDetail.typeface = typeface
-        binding.textViewOverviewDetail.typeface = typeface
-    }
-
-    private fun populateUi(movie: MovieModel) {
-        binding.apply {
-            Glide.with(binding.root)
-                .load("${Constant.IMAGE_URL}${movie.poster_path}")
-                .error(R.drawable.ic_launcher_foreground)
-                .into(imageViewDetail)
-
-            textViewTitleDetail.text = movie.title
-            textViewDateDetail.text = movie.release_date
-            textViewOverviewDetail.text = movie.overview
-
-            ivFav.setOnClickListener {
-                toggleFavMovies(movie)
-            }
-
-        }
     }
 
     private fun toggleFavMovies(selectedMovie: MovieModel) {
@@ -128,16 +95,19 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private fun removeMovieFromFav(selectedMovie: MovieModel) {
         isFav = false
         viewModel.deleteMovie(selectedMovie)
-        Toast.makeText(requireActivity(), "deleted...", Toast.LENGTH_SHORT).show()
-
-        binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_24)
+        binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_30)
+        showToastMessage(message = "Deleted Successfully")
     }
 
     private fun addMovieToFav(selectedMovie: MovieModel) {
         isFav = true
         viewModel.insertMovie(selectedMovie)
-        Toast.makeText(requireActivity(), "saved...", Toast.LENGTH_SHORT).show()
         binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
+        showToastMessage(message = "saved Successfully")
+    }
+
+    private fun showToastMessage(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun observeTrailers() {
@@ -145,7 +115,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
             when (dataState) {
                 is DataState.Loading -> {
-
                     showTrailerRecyclerView(isDisplayed = false)
                     showTrailerProgressbar(isDisplayed = true)
                 }
@@ -153,19 +122,14 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                     if (detailedMovie.id == checkedId) {
                         showTrailerProgressbar(isDisplayed = false)
                         showTrailerRecyclerView(isDisplayed = true)
-
                         val trailers = dataState.data
                         trailerAdapter.differ.submitList(trailers)
                     }
 
                 }
                 is DataState.Error -> {
-
                     showTrailerProgressbar(isDisplayed = false)
                     showTrailerRecyclerView(isDisplayed = false)
-
-                    Toast.makeText(context, "${dataState.exception.message}", Toast.LENGTH_SHORT)
-                        .show()
                     Log.d(TAG, "error occurred .. ${dataState.exception.message}")
                 }
             }
@@ -185,13 +149,10 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
             when (dataState) {
                 is DataState.Loading -> {
-
                     showCastRecyclerView(isDisplayed = false)
                     showCastProgressbar(isDisplayed = true)
-
                 }
                 is DataState.Success -> {
-
                     if (detailedMovie.id == checkedId) {
                         showCastProgressbar(isDisplayed = false)
                         showCastRecyclerView(isDisplayed = true)
@@ -199,11 +160,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                         val cast: List<CastModel> = dataState.data
                         castAdapter.differ.submitList(cast)
                     }
-
-
                 }
                 is DataState.Error -> {
-
                     showCastProgressbar(isDisplayed = false)
                     showCastRecyclerView(isDisplayed = false)
                     Log.d(TAG, "error occurred ${dataState.exception.message}")
@@ -235,7 +193,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
 
                         val reviews = dataState.data
                         if (reviews.isNullOrEmpty()) {
-
                             showReviewRecyclerView(isDisplayed = false)
                             showEmptyReviewText(isDisplayed = true)
 
@@ -244,8 +201,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
                             reviewAdapter.differ.submitList(reviews)
                         }
                     }
-
-
                 }
                 is DataState.Error -> {
                     showReviewProgressbar(isDisplayed = false)
@@ -268,7 +223,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         binding.tvEmptyReview.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
-    private fun initRecyclerViewTrailer() {
+    private fun initTrailerRecyclerView() {
 
         trailerAdapter = MovieTrailerAdapter(typeface, this)
         binding.recyclerViewTrailer.apply {
@@ -277,15 +232,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         }
     }
 
-    private fun initRecyclerViewReview() {
-        reviewAdapter = MovieReviewAdapter(typeface)
-        binding.recyclerViewReviews.apply {
-            adapter = reviewAdapter
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun initRecyclerViewCast() {
+    private fun initCastRecyclerView() {
         castAdapter = MovieCastAdapter(typeface, this)
         binding.recyclerViewCast.apply {
             adapter = castAdapter
@@ -293,16 +240,45 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         }
     }
 
+    private fun initReviewRecyclerView() {
+        reviewAdapter = MovieReviewAdapter(typeface)
+        binding.recyclerViewReviews.apply {
+            adapter = reviewAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun populateUi(movie: MovieModel) {
+        val date = '(' + movie.release_date + ')'
+        binding.apply {
+            Glide.with(binding.root)
+                .load("${Constant.IMAGE_URL}${movie.poster_path}")
+                .error(R.drawable.ic_baseline_image_24)
+                .into(imageViewDetail)
+
+            textViewTitleDetail.text = movie.title
+            textViewDateDetail.text = date
+            expand_text_view.text = movie.overview
+
+            ivFav.setOnClickListener {
+                toggleFavMovies(movie)
+            }
+        }
+    }
+
+    private fun applyCustomFont() {
+        binding.textViewReviewLabel.typeface = typeface
+        binding.textViewCastLabel.typeface = typeface
+        binding.textViewTrailerLabel.typeface = typeface
+        binding.textViewTitleDetail.typeface = typeface
+        binding.textViewDateDetail.typeface = typeface
+        binding.expandableText.typeface = typeface
+    }
 
     override fun onItemClick(trailerModel: TrailerModel?) {
-//        val action =
-//            MovieDetailFragmentDirections.actionMovieDetailFragmentToYoutubeFragment(trailerModel!!)
-//        findNavController().navigate(action)
-
         val intent = Intent(activity, YoutubeActivity::class.java)
         intent.putExtra("trailerModel", trailerModel)
         startActivity(intent)
-
     }
 
     override fun onItemClick(castModel: CastModel?) {

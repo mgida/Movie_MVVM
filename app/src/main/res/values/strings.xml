@@ -8,12 +8,12 @@
     <string name="fake_date">10/17</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="reviews">Reviews</string>
-    <string name="cast">Cast</string>
+    <string name="reviews">Reviews :</string>
+    <string name="cast">Cast :</string>
     <string name="popular_movies">Popular</string>
-    <string name="top_rated">Top rated</string>
+    <string name="top_rated">Top Rated</string>
     <string name="upcoming">Upcoming</string>
-    <string name="trailer">Trailer</string>
+    <string name="trailer">Trailer :</string>
     <string name="emptyReview">No Reviews Found</string>
     <string name="fake_duration">1h 12min</string>
     <string name="fake_director">sam mendes</string>
@@ -26,4 +26,6 @@
     <string name="favourites">Favourites</string>
     <string name="your_fav_is_empty">your fav is empty !!</string>
     <string name="moviesLabel">Movies</string>
+    <string name="youtube_label">youtube</string>
+    <string name="netflix">Netflix</string>
 </resources>

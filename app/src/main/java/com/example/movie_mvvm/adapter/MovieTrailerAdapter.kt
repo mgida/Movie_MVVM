@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.MovieTrailerListItemBinding
-import com.example.movie_mvvm.utils.Constant
 
 class MovieTrailerAdapter(private val typeface: Typeface,private val listener: OnItemClickListener) :
     RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerViewHolder>() {
@@ -23,7 +22,6 @@ class MovieTrailerAdapter(private val typeface: Typeface,private val listener: O
 
         init {
             binding.textViewTrailerName.typeface = typeface
-            binding.textViewTrailerSite.typeface = typeface
 
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -40,7 +38,7 @@ class MovieTrailerAdapter(private val typeface: Typeface,private val listener: O
             binding.apply {
 
                 textViewTrailerName.text = trailerModel?.name
-                textViewTrailerSite.text = trailerModel?.site
+               // textViewTrailerSite.text = trailerModel?.site
             }
         }
     }

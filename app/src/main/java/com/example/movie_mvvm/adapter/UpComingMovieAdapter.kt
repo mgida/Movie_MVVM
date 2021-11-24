@@ -42,7 +42,7 @@ class UpComingMovieAdapter(private val typeface: Typeface,private val listener: 
             binding.apply {
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_baseline_image_24)
                     .into(imageViewUpcoming)
 
                 textViewTitleUpcoming.text = currentMovie?.title ?: "venom"

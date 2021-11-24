@@ -9,41 +9,57 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/backgroundColor">
 
         <ImageView
             android:id="@+id/imageViewDetail"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="400dp"
+            android:background="@color/purple_500"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/purple_500" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/ivFav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@null"
-            app:layout_constraintEnd_toEndOf="@id/imageViewDetail"
-            app:layout_constraintTop_toTopOf="@+id/imageViewDetail"
-            app:srcCompat="@drawable/ic_baseline_favorite_24" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewDetail"
+            app:layout_constraintEnd_toEndOf="@id/imageViewDetail">
+
+            <ImageButton
+                android:id="@+id/ivFav"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/purple_500"
+                android:contentDescription="@null"
+
+                app:srcCompat="@drawable/ic_baseline_favorite_30" />
+
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textViewTitleDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/opacityWhiteColor"
             app:layout_constraintStart_toStartOf="@id/imageViewDetail"
             app:layout_constraintTop_toBottomOf="@id/imageViewDetail"
             tools:text="@string/fake_title" />
-
 
         <TextView
             android:id="@+id/textViewDateDetail"
@@ -51,45 +67,65 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/textViewTitleDetail"
             app:layout_constraintTop_toBottomOf="@+id/imageViewDetail"
             tools:text="@string/fake_date" />
 
-        <TextView
-            android:id="@+id/textViewOverviewDetail"
-            android:layout_width="wrap_content"
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/expand_text_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/opacityWhiteColor"
+            app:animDuration="100"
             app:layout_constraintStart_toStartOf="@+id/textViewTitleDetail"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetail"
-            tools:text="@string/fake_overview" />
+            app:maxCollapsedLines="2"
+            tools:text="@string/fake_overview">
 
+            <TextView
+                android:id="@+id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/opacityWhiteColor"
+                tools:text="@string/fake_overview" />
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null" />
+
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
 
         <TextView
             android:id="@+id/textViewReviewLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/reviews"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/teal_700"
-            app:layout_constraintStart_toStartOf="@id/textViewOverviewDetail"
-            app:layout_constraintTop_toBottomOf="@id/textViewOverviewDetail" />
-
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/expand_text_view" />
 
         <ProgressBar
             android:id="@+id/progressBarReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:theme="@style/progressBarWhite"            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewReviewLabel" />
-
 
         <TextView
             android:id="@+id/tvEmptyReview"
@@ -100,7 +136,6 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/emptyReview"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-
             android:textColor="@color/opacityWhiteColor"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/textViewCastLabel"
@@ -111,7 +146,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReviews"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -124,19 +160,22 @@
             android:id="@+id/textViewCastLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/cast"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/teal_700"
-            app:layout_constraintStart_toStartOf="@id/recyclerViewReviews"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerViewReviews" />
 
         <ProgressBar
             android:id="@+id/progressBarCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:theme="@style/progressBarWhite"            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewCastLabel"
@@ -146,6 +185,7 @@
             android:id="@+id/recyclerViewCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -158,18 +198,21 @@
             android:id="@+id/textViewTrailerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/trailer"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/teal_700"
-            app:layout_constraintStart_toStartOf="@+id/recyclerViewCast"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recyclerViewCast" />
 
         <ProgressBar
             android:id="@+id/progressBarTrailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/progressBarWhite"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,6 +223,7 @@
             android:id="@+id/recyclerViewTrailer"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="10dp"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

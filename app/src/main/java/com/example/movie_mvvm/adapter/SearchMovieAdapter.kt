@@ -60,7 +60,7 @@ class SearchMovieAdapter(
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
                     .placeholder(R.color.purple_500)
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_baseline_image_24)
                     .into(imageViewSearch)
                 tvMovieTitle.text = currentMovie?.original_title
                 tvMovieDirector.text = currentMovie?.release_date

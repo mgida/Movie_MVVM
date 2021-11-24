@@ -24,7 +24,6 @@ class MovieRepository(private val movieDao: MovieDao) {
             pagingSourceFactory = { MoviePagingDataSource(query) }
         ).liveData
 
-
     fun searchMovies(searchQuery: String) =
         Pager(
             config = PagingConfig(
@@ -50,9 +49,7 @@ class MovieRepository(private val movieDao: MovieDao) {
     suspend fun deleteMovie(movieModel: MovieModel) =
         movieDao.deleteMovie(movieModel)
 
-
     fun selectMovieById(id: Int) =
         movieDao.selectMovieByID(id)
-
 
 }

@@ -45,7 +45,7 @@ class TopRatedMovieAdapter(
             binding.apply {
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_baseline_image_24)
                     .into(imageViewTopRated)
 
                 textViewTitleTopRated.text = currentMovie?.title ?: "venom"

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovie(movieModel: MovieModel): Long
+    suspend fun insertMovie(movieModel: MovieModel)
 
     @Delete
     suspend fun deleteMovie(movieModel: MovieModel)
@@ -18,6 +18,5 @@ interface MovieDao {
 
     @Query("select * from movies where ID = :id")
     fun selectMovieByID(id: Int): LiveData<MovieModel>
-
 
 }

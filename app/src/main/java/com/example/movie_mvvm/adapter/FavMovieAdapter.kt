@@ -47,11 +47,12 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
 
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_baseline_image_24)
                     .into(imageViewSearchFav)
                 tvMovieTitleFav.text = currentMovie?.original_title
                 tvMovieDirectorFav.text = currentMovie?.release_date
                 tvMovieDurationFav.text = itemView.context.getString(R.string.fake_duration)
+                tvMovieGenreFav.text = itemView.context.getString(R.string.genre)
                 tvMovieGenreFav.text = itemView.context.getString(R.string.genre)
                 ratingBarFav.rating = (currentMovie?.vote_average)!!.toFloat()
             }
@@ -84,3 +85,6 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
 
     override fun getItemCount() = differ.currentList.size
 }
+/*
+https://api.themoviedb.org/3/movie/550?api_key=6f520821cbe7d8a6623235903a2787d5
+ */

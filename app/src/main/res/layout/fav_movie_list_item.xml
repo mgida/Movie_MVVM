@@ -2,9 +2,11 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="@color/backgroundColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewFav"
@@ -21,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@color/purple_500"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:background="@color/purple_500" />
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -32,51 +34,51 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/fake_title"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/cardViewFav"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/fake_title" />
 
     <TextView
         android:id="@+id/tvMovieDurationFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/fake_duration"
         android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toStartOf="@+id/tvMovieTitleFav"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitleFav" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitleFav"
+        tools:text="@string/fake_duration" />
 
     <TextView
         android:id="@+id/tvMovieGenreFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/genre"
         android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toStartOf="@+id/tvMovieDurationFav"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieDurationFav" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieDurationFav"
+        tools:text="@string/genre" />
 
     <TextView
         android:id="@+id/tvMovieDirectorFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/fake_director"
         android:textColor="@color/opacityWhiteColor"
         app:layout_constraintStart_toEndOf="@+id/tvMovieGenreFav"
-        app:layout_constraintTop_toTopOf="@+id/guidelineFav" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineFav"
+        tools:text="@string/fake_director" />
 
     <TextView
         android:id="@+id/textViewYearFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/movie_date"
         android:textColor="@color/opacityWhiteColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvMovieDirectorFav"
-        app:layout_constraintTop_toTopOf="@+id/guidelineFav" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineFav"
+        tools:text="@string/movie_date" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineFav"
@@ -91,7 +93,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:numStars="5"
+        android:numStars="10"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@android:color/holo_red_dark"
         app:layout_constraintStart_toStartOf="@+id/tvMovieGenreFav"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieGenreFav" />
 

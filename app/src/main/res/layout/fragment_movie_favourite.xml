@@ -15,29 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/fav_movie_list_item" />
-
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBarMovieFav"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:visibility="visible" />-->
-
 
 <!--    <TextView-->
 <!--        android:id="@+id/textViewNoResultMovieFav"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="@string/your_fav_is_empty"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
+<!--        android:textColor="@color/opacityWhiteColor"-->
 <!--        android:visibility="gone"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
@@ -47,4 +36,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!-- app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->

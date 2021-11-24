@@ -20,9 +20,9 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    lateinit var responsePopular: LiveData<PagingData<MovieModel>>
-    lateinit var responseTopRated: LiveData<PagingData<MovieModel>>
-    lateinit var responseUpcoming: LiveData<PagingData<MovieModel>>
+    lateinit var popularResponse: LiveData<PagingData<MovieModel>>
+    lateinit var topRatedResponse: LiveData<PagingData<MovieModel>>
+    lateinit var upcomingResponse: LiveData<PagingData<MovieModel>>
 
     val favourites: LiveData<List<MovieModel>> = repository.favouriteMoviesRepo.asLiveData()
 
@@ -47,15 +47,15 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     }
 
     private fun getUpcomingMovies() {
-        responseUpcoming = getMoviesOf(type = UPCOMING)
+        upcomingResponse = getMoviesOf(type = UPCOMING)
     }
 
     private fun getTopRatedMovies() {
-        responseTopRated = getMoviesOf(type = TOP_RATED)
+        topRatedResponse = getMoviesOf(type = TOP_RATED)
     }
 
     private fun getPopularMovies() {
-        responsePopular = getMoviesOf(type = POPULAR)
+        popularResponse = getMoviesOf(type = POPULAR)
     }
 
     private fun getMoviesOf(type: String): LiveData<PagingData<MovieModel>> {
@@ -118,7 +118,6 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     }
 
     fun insertMovie(movieModel: MovieModel) {
-
         viewModelScope.launch {
             try {
                 repository.insertMovie(movieModel)
@@ -129,7 +128,6 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     }
 
     fun deleteMovie(movieModel: MovieModel) {
-
         viewModelScope.launch {
             try {
                 repository.deleteMovie(movieModel)

@@ -20,6 +20,7 @@ import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.SharedViewModel
 
+
 class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     SearchMovieAdapter.OnItemClickListener {
 
@@ -35,9 +36,11 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieSearchBinding.bind(view)
-        binding.searchView.setIconifiedByDefault(false)
-        binding.searchView.requestFocus()
 
+        binding.searchView.apply {
+            setIconifiedByDefault(false)
+            requestFocus()
+        }
         typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
 
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
@@ -49,15 +52,10 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
                     searchMovies(query)
                 }
             })
-//        val movieDao = MovieDatabase.invoke(requireContext()).getMovieDao()
-//        val movieRepository = MovieRepository(movieDao)
-//        val viewModelFactory = MovieViewModelFactory(movieRepository)
-//        viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
 
         viewModel = (activity as MainActivity).viewModel
 
-        // viewModel.getMoviesFromDB()
-        initRecyclerViewSearch()
+        initSearchRecyclerView()
 
         binding.btnRetrySearch.setOnClickListener {
             searchMovieAdapter.retry()
@@ -65,8 +63,8 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
 
+                if (query != null) {
                     binding.recyclerViewSearch.scrollToPosition(0)
                     searchMovies(query)
                     sharedViewModel.bundleFromFragmentDetailToFragmentSearch.postValue(query)
@@ -116,7 +114,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
         binding.btnRetrySearch.isVisible = loadState.source.refresh is LoadState.Error
     }
 
-    private fun initRecyclerViewSearch() {
+    private fun initSearchRecyclerView() {
         searchMovieAdapter = SearchMovieAdapter(typeface, this)
         binding.recyclerViewSearch.apply {
             adapter = searchMovieAdapter.withLoadStateFooter(
@@ -131,7 +129,6 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
             MovieSearchFragmentDirections.actionMovieSearchFragmentToMovieDetailFragment(movieModel)
         findNavController().navigate(action)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

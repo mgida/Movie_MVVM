@@ -37,7 +37,7 @@ class PopularMovieAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_baseline_image_24)
                     .into(imageViewPopular)
             }
         }

@@ -22,23 +22,27 @@ class MovieCastFragment : Fragment(R.layout.fragment_movie_cast) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieCastBinding.bind(view)
+
         typeface = Typeface.createFromAsset(requireActivity().assets, AntiqueFont)
         val cast = args.cast
         populateUi(cast)
-
     }
 
     private fun populateUi(cast: CastModel) {
         binding.apply {
             Glide.with(this@MovieCastFragment)
                 .load("$IMAGE_URL${cast.profile_path}")
-                .error(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_baseline_image_24)
                 .into(imageViewCast)
 
-            textViewCastName.typeface = typeface
-            textViewCastName.text = cast.original_name
-            textViewCharacter.typeface = typeface
-            textViewCharacter.text = cast.character
+            textViewCastName.apply {
+                typeface = typeface
+                text = cast.original_name
+            }
+            textViewCharacter.apply {
+                typeface = typeface
+                text = cast.character
+            }
         }
     }
 

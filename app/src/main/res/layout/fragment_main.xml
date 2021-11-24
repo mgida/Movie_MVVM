@@ -74,7 +74,7 @@
             android:id="@+id/recyclerViewPopular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -87,18 +87,16 @@
             app:layout_constraintVertical_bias="0.121"
             tools:listitem="@layout/popular_movie_list_item" />
 
-
         <TextView
             android:id="@+id/tvTopRated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/top_rated"
+            android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerViewTopRated"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewPopular"
             app:layout_constraintTop_toBottomOf="@id/recyclerViewPopular" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -150,10 +148,10 @@
             android:id="@+id/recyclerViewTopRated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:layout_marginBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvUpComing"
@@ -167,9 +165,9 @@
             android:id="@+id/tvUpComing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/upcoming"
+            android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewUpComing"
@@ -223,7 +221,7 @@
             android:id="@+id/recyclerViewUpComing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
