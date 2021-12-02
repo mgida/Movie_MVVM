@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
 
 }
@@ -113,5 +114,14 @@ dependencies {
     implementation 'com.android.databinding:viewbinding:7.0.3'
 
     implementation 'com.ms-square:expandableTextView:0.1.4'
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    def hilt_viewmodels = "1.0.0-alpha02"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
 
 }
