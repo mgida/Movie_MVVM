@@ -7,10 +7,10 @@ import com.example.movie_mvvm.data.MoviePagingDataSource
 import com.example.movie_mvvm.data.MovieSearchPagingDataSource
 import com.example.movie_mvvm.data.database.MovieDao
 import com.example.movie_mvvm.data.model.MovieModel
-import com.example.movie_mvvm.data.network.RetrofitInstance
+import com.example.movie_mvvm.data.network.MovieService
 import kotlinx.coroutines.flow.Flow
 
-class MovieRepository(private val movieDao: MovieDao) {
+class MovieRepository(private val movieService: MovieService, private val movieDao: MovieDao) {
 
     val favouriteMoviesRepo: Flow<List<MovieModel>> = movieDao.getMoviesFromDB()
 
@@ -21,7 +21,7 @@ class MovieRepository(private val movieDao: MovieDao) {
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MoviePagingDataSource(query) }
+            pagingSourceFactory = { MoviePagingDataSource(movieService, query) }
         ).liveData
 
     fun searchMovies(searchQuery: String) =
@@ -31,20 +31,20 @@ class MovieRepository(private val movieDao: MovieDao) {
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MovieSearchPagingDataSource(searchQuery) }
+            pagingSourceFactory = { MovieSearchPagingDataSource(movieService, searchQuery) }
         ).liveData
 
     suspend fun getMovieReviews(id: Int, apiKey: String) =
-        RetrofitInstance.movieService.getMovieReviews(id = id, apiKey = apiKey)
+        movieService.getMovieReviews(id = id, apiKey = apiKey)
 
     suspend fun getMovieCredits(id: Int, apiKey: String) =
-        RetrofitInstance.movieService.getMovieCredits(id = id, apiKey = apiKey)
+        movieService.getMovieCredits(id = id, apiKey = apiKey)
 
     suspend fun getCastDetail(personId: Int, apiKey: String) =
-        RetrofitInstance.movieService.getCastDetail(personId = personId, apiKey = apiKey)
+        movieService.getCastDetail(personId = personId, apiKey = apiKey)
 
     suspend fun getMovieTrailers(id: Int, apiKey: String) =
-        RetrofitInstance.movieService.getMovieTrailers(id = id, apiKey = apiKey)
+        movieService.getMovieTrailers(id = id, apiKey = apiKey)
 
     suspend fun insertMovie(movieModel: MovieModel) =
         movieDao.insertMovie(movieModel)

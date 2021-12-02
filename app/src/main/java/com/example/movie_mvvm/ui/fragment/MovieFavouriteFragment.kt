@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,17 +15,18 @@ import com.example.movie_mvvm.R
 import com.example.movie_mvvm.adapter.FavMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMovieFavouriteBinding
-import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
     FavMovieAdapter.OnItemClickListener {
 
     private var _binding: FragmentMovieFavouriteBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel by viewModels<MovieViewModel>()
     private lateinit var typeface: Typeface
     private lateinit var favMovieAdapter: FavMovieAdapter
 
@@ -32,7 +34,6 @@ class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieFavouriteBinding.bind(view)
 
-        viewModel = (activity as MainActivity).viewModel
         typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
         favMovieAdapter = FavMovieAdapter(typeface, this)
 

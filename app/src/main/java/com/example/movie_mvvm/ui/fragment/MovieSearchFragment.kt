@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
@@ -15,18 +16,18 @@ import com.example.movie_mvvm.adapter.MovieLoadStateAdapter
 import com.example.movie_mvvm.adapter.SearchMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMovieSearchBinding
-import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import com.example.movie_mvvm.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     SearchMovieAdapter.OnItemClickListener {
 
     private var _binding: FragmentMovieSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel by viewModels<MovieViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
 
     private lateinit var searchMovieAdapter: SearchMovieAdapter
@@ -52,8 +53,6 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
                     searchMovies(query)
                 }
             })
-
-        viewModel = (activity as MainActivity).viewModel
 
         initSearchRecyclerView()
 

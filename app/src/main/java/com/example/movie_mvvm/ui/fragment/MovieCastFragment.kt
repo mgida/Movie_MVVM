@@ -4,24 +4,26 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.databinding.FragmentMovieCastBinding
-import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.utils.Constant.Companion.AntiqueFont
 import com.example.movie_mvvm.utils.Constant.Companion.IMAGE_URL
 import com.example.movie_mvvm.viewmodel.MovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieCastFragment : Fragment(R.layout.fragment_movie_cast) {
 
     private var _binding: FragmentMovieCastBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<MovieCastFragmentArgs>()
     private lateinit var typeface: Typeface
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel by viewModels<MovieViewModel>()
     private var idObserved = MutableLiveData<Int>()
     private var checkedId: Int? = null
     private lateinit var cast: CastModel
@@ -29,7 +31,6 @@ class MovieCastFragment : Fragment(R.layout.fragment_movie_cast) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieCastBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
         typeface = Typeface.createFromAsset(requireActivity().assets, AntiqueFont)
 
         cast = args.cast
@@ -83,8 +84,3 @@ class MovieCastFragment : Fragment(R.layout.fragment_movie_cast) {
 
     }
 }
-
-/*
-2524
-https://api.themoviedb.org/3/person/{person_id}/movie_credits?api_key=6f520821cbe7d8a6623235903a2787d5&language=en-US
- */

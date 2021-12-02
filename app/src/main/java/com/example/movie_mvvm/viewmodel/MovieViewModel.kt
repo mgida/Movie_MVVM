@@ -16,10 +16,13 @@ import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.Constant.Companion.TOP_RATED
 import com.example.movie_mvvm.utils.Constant.Companion.UPCOMING
 import com.example.movie_mvvm.utils.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+@HiltViewModel
+class MovieViewModel @Inject constructor
+    (private val repository: MovieRepository) : ViewModel() {
 
     lateinit var popularResponse: LiveData<PagingData<MovieModel>>
     lateinit var topRatedResponse: LiveData<PagingData<MovieModel>>

@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.paging.CombinedLoadStates
@@ -20,11 +21,11 @@ import com.example.movie_mvvm.adapter.TopRatedMovieAdapter
 import com.example.movie_mvvm.adapter.UpComingMovieAdapter
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.FragmentMainBinding
-import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.utils.Constant.Companion.AntiqueFont
 import com.example.movie_mvvm.viewmodel.MovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainFragment :
     Fragment(R.layout.fragment_main),
     PopularMovieAdapter.OnItemClickListener,
@@ -39,13 +40,12 @@ class MainFragment :
     private lateinit var upcomingMovieAdapter: UpComingMovieAdapter
 
     private lateinit var typeface: Typeface
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel by viewModels<MovieViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentMainBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
 
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.elevation = 0F

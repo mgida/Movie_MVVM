@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,14 +20,15 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.FragmentMovieDetailBinding
-import com.example.movie_mvvm.ui.MainActivity
 import com.example.movie_mvvm.ui.YoutubeActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.DataState
 import com.example.movie_mvvm.viewmodel.MovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     MovieTrailerAdapter.OnItemClickListener, MovieCastAdapter.OnItemClickListener {
 
@@ -34,7 +36,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private val binding get() = _binding!!
     private val args by navArgs<MovieDetailFragmentArgs>()
 
-    private lateinit var viewModel: MovieViewModel
+    private val viewModel by viewModels<MovieViewModel>()
     private lateinit var reviewAdapter: MovieReviewAdapter
     private lateinit var castAdapter: MovieCastAdapter
     private lateinit var trailerAdapter: MovieTrailerAdapter
@@ -48,7 +50,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
-        viewModel = (activity as MainActivity).viewModel
         typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
 
         detailedMovie = args.movie
