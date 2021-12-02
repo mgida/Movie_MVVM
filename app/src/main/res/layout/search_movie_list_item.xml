@@ -2,14 +2,16 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="@color/backgroundColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:layout_margin="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="12dp"
@@ -21,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:contentDescription="@null"
             android:background="@color/purple_500"
+            android:contentDescription="@null"
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
@@ -31,84 +33,76 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:text="@string/fake_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/tvMovieDuration"
+        android:id="@+id/tvMovieOverview"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0.5"
+        android:ellipsize="end"
+        android:lines="3"
+        android:maxLines="3"
+        android:textColor="@color/opacityWhiteColor"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/tvMovieDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieDate"
+        tools:text="@string/overview" />
+
+
+    <TextView
+        android:id="@+id/tvMovieRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/fake_duration"
-        android:textColor="@color/opacityWhiteColor"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+        android:text="@string/fake_rate"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/tvMovieOverview"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
-        android:id="@+id/tvMovieGenre"
+        android:id="@+id/tvMovieDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/genre"
+        android:alpha="0.5"
         android:textColor="@color/opacityWhiteColor"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieDuration"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieDuration" />
-
-    <TextView
-        android:id="@+id/tvMovieDirector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/fake_director"
-        android:textColor="@color/opacityWhiteColor"
-        app:layout_constraintStart_toEndOf="@+id/tvMovieGenre"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/opacityWhiteColor"
-        android:text="@string/movie_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvMovieDirector"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/tvMovieTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+        tools:layout_editor_absoluteY="16dp"
+        tools:text="@string/movie_date" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="87dp" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
         android:numStars="10"
-        android:progressTint="@android:color/holo_red_dark"
         android:progressBackgroundTint="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/tvMovieGenre"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieGenre" />
+        android:progressTint="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMovieRate"
+        app:layout_constraintStart_toEndOf="@+id/tvMovieRate"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/imageButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:background="@color/white"-->
-<!--        android:contentDescription="@null"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/ic_baseline_bookmark_border_24" />-->
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

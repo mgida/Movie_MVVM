@@ -58,6 +58,11 @@ class MainFragment :
         initUpcomingRecyclerView()
 
         binding.btnRetry.setOnClickListener {
+            binding.apply {
+                tvPopular.isVisible = true
+                tvTopRated.isVisible = true
+                tvUpComing.isVisible = true
+            }
             popularMovieAdapter.retry()
             topRatedMovieAdapter.retry()
             upcomingMovieAdapter.retry()
@@ -90,7 +95,9 @@ class MainFragment :
             binding.recyclerViewUpComing.isVisible =
                 loadState.source.refresh is LoadState.NotLoading
             manageViews(loadState)
-
+            if (loadState.source.refresh is LoadState.Error) {
+                binding.tvUpComing.isVisible = false
+            }
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && upcomingMovieAdapter.itemCount < 1
             ) {
@@ -99,7 +106,6 @@ class MainFragment :
             } else {
                 binding.textViewNoResult.isVisible = false
             }
-
         }
     }
 
@@ -109,7 +115,9 @@ class MainFragment :
                 loadState.source.refresh is LoadState.NotLoading
 
             manageViews(loadState)
-
+            if (loadState.source.refresh is LoadState.Error) {
+                binding.tvTopRated.isVisible = false
+            }
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && topRatedMovieAdapter.itemCount < 1
             ) {
@@ -128,6 +136,9 @@ class MainFragment :
 
             manageViews(loadState)
 
+            if (loadState.source.refresh is LoadState.Error) {
+                binding.tvPopular.isVisible = false
+            }
             if (loadState.source.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached && popularMovieAdapter.itemCount < 1
             ) {
@@ -136,12 +147,11 @@ class MainFragment :
             } else {
                 binding.textViewNoResult.isVisible = false
             }
-
         }
     }
 
     private fun manageViews(loadState: CombinedLoadStates) {
-     //   binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        //   binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
         binding.shimmerFrameLayoutPopular.isVisible = loadState.source.refresh is LoadState.Loading
         binding.shimmerFrameLayoutTopRated.isVisible = loadState.source.refresh is LoadState.Loading
         binding.shimmerFrameLayoutUpComing.isVisible = loadState.source.refresh is LoadState.Loading

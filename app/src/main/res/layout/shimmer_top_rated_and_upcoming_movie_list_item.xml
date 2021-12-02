@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="170dp"
-    android:layout_marginStart="8dp"
+    android:layout_height="200dp"
     android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -14,13 +13,13 @@
         android:layout_height="120dp"
         android:layout_marginBottom="8dp"
         android:elevation="10dp"
-
         app:cardCornerRadius="12dp">
 
         <ImageView
             android:id="@+id/imageViewTopRatedShimmer"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/purple_500"
             android:contentDescription="@null"
             android:scaleType="centerCrop" />
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:background="@color/purple_500"
-
         android:maxEms="1"
         android:maxLines="2"
         tools:text="@string/fake_title" />
@@ -43,7 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/purple_500"
-
         tools:text="@string/fake_date" />
 
 </LinearLayout>

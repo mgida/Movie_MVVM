@@ -3,7 +3,7 @@
     <string name="something_went_wrong">something went wrong</string>
     <string name="retry">retry</string>
     <string name="no_results_found">No Results Found</string>
-    <string name="can_t_load_movies">can\'t load movies</string>
+    <string name="can_t_load_movies">Can\'t Load Movies</string>
     <string name="fake_title">Venom</string>
     <string name="fake_date">10/17</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -18,14 +18,16 @@
     <string name="fake_duration">1h 12min</string>
     <string name="fake_director">sam mendes</string>
     <string name="genre">Action</string>
-    <string name="movie_date">2020</string>
+    <string name="movie_date">10/20/2020</string>
     <string name="search">search</string>
     <string name="no_search_yet">No Search Yet</string>
-    <string name="search_movies">Search movies</string>
+    <string name="search_movies">Search Movies…</string>
     <string name="fake_overview">awesome movie .. you gotta watch it !!</string>
     <string name="favourites">Favourites</string>
     <string name="your_fav_is_empty">your fav is empty !!</string>
     <string name="moviesLabel">Movies</string>
     <string name="youtube_label">youtube</string>
     <string name="netflix">Netflix</string>
+    <string name="overview">tom hardy plays a nice role\n tom hardy plays a nice role tom hardy plays a nice role\n tom hardy plays a nice role tom hardy plays a nice role\n tom hardy plays a nice role.....</string>
+    <string name="fake_rate">7.5</string>
 </resources>

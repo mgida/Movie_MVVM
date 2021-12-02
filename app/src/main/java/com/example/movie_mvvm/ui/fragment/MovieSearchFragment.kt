@@ -91,6 +91,7 @@ class MovieSearchFragment : Fragment(R.layout.fragment_movie_search),
     }
 
     private fun manageSearchMoviesStates() {
+        binding.textViewNoResultSearch.typeface = typeface
         searchMovieAdapter.addLoadStateListener { loadState ->
             binding.recyclerViewSearch.isVisible = loadState.source.refresh is LoadState.NotLoading
 

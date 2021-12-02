@@ -1,5 +1,6 @@
 package com.example.movie_mvvm.ui.fragment
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
@@ -56,9 +57,12 @@ class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
 
                 viewModel.deleteMovie(swipedMovie)
 
-                Snackbar.make(view, "deleted Successfully", Snackbar.LENGTH_LONG).apply {
-                    setAction("Undo") {
 
+                Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
+                    setActionTextColor(Color.parseColor("#f5f3f4"))
+                    setTextColor(Color.parseColor("#FFFFFFFF"))
+                    getView().setBackgroundColor(Color.parseColor("#FF000000"))
+                    setAction("Undo") {
                         viewModel.insertMovie(swipedMovie)
                         Toast.makeText(requireActivity(), "Saved Successfully", Toast.LENGTH_SHORT)
                             .show()

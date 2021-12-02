@@ -40,6 +40,9 @@ class MovieRepository(private val movieDao: MovieDao) {
     suspend fun getMovieCredits(id: Int, apiKey: String) =
         RetrofitInstance.movieService.getMovieCredits(id = id, apiKey = apiKey)
 
+    suspend fun getCastDetail(personId: Int, apiKey: String) =
+        RetrofitInstance.movieService.getCastDetail(personId = personId, apiKey = apiKey)
+
     suspend fun getMovieTrailers(id: Int, apiKey: String) =
         RetrofitInstance.movieService.getMovieTrailers(id = id, apiKey = apiKey)
 

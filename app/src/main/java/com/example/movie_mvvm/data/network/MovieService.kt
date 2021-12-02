@@ -2,6 +2,7 @@ package com.example.movie_mvvm.data.network
 
 import com.example.movie_mvvm.data.model.MovieResponse
 import com.example.movie_mvvm.data.model.cast.CastResponse
+import com.example.movie_mvvm.data.model.cast_detail.CastDetailResponse
 import com.example.movie_mvvm.data.model.review.ReviewResponse
 import com.example.movie_mvvm.data.model.trailer.TrailerResponse
 import retrofit2.http.GET
@@ -29,6 +30,12 @@ interface MovieService {
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,
     ): CastResponse
+
+    @GET("person/{person_id}")
+    suspend fun getCastDetail(
+        @Path("person_id") personId: Int,
+        @Query("api_key") apiKey: String
+    ): CastDetailResponse
 
     @GET("movie/{id}/videos")
     suspend fun getMovieTrailers(

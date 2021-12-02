@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.data.model.cast.CastModel
+import com.example.movie_mvvm.data.model.cast_detail.CastDetailResponse
 import com.example.movie_mvvm.data.model.review.ReviewModel
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.repository.MovieRepository
@@ -35,6 +36,10 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     private var _movieCast: MutableLiveData<DataState<List<CastModel>>> =
         MutableLiveData<DataState<List<CastModel>>>()
     val movieCast: LiveData<DataState<List<CastModel>>> get() = _movieCast
+
+    private var _castDetail: MutableLiveData<CastDetailResponse> =
+        MutableLiveData<CastDetailResponse>()
+    val castDetail: LiveData<CastDetailResponse> get() = _castDetail
 
     private var _movieTrailers: MutableLiveData<DataState<List<TrailerModel>>> =
         MutableLiveData<DataState<List<TrailerModel>>>()
@@ -100,6 +105,17 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
             } catch (e: Exception) {
                 Log.d(TAG, "error occurred ${e.printStackTrace()}")
                 _movieCast.postValue(DataState.Error(e))
+            }
+        }
+    }
+
+    fun getCastDetail(personId: Int, apiKey: String = API_KEY) {
+        viewModelScope.launch {
+            try {
+                val response = repository.getCastDetail(personId, apiKey)
+                _castDetail.postValue(response)
+            } catch (e: Exception) {
+                Log.d(TAG, "error occurred ${e.printStackTrace()}")
             }
         }
     }

@@ -27,9 +27,9 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
         init {
 
             binding.tvMovieTitleFav.typeface = typeface
-            binding.tvMovieDirectorFav.typeface = typeface
-            binding.tvMovieDurationFav.typeface = typeface
-            binding.tvMovieGenreFav.typeface = typeface
+            binding.tvMovieDateFav.typeface = typeface
+            binding.tvMovieOverviewFav.typeface = typeface
+            binding.tvMovieRateFav.typeface = typeface
 
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -48,13 +48,12 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
                     .error(R.drawable.ic_baseline_image_24)
-                    .into(imageViewSearchFav)
+                    .into(imageViewFav)
                 tvMovieTitleFav.text = currentMovie?.original_title
-                tvMovieDirectorFav.text = currentMovie?.release_date
-                tvMovieDurationFav.text = itemView.context.getString(R.string.fake_duration)
-                tvMovieGenreFav.text = itemView.context.getString(R.string.genre)
-                tvMovieGenreFav.text = itemView.context.getString(R.string.genre)
-                ratingBarFav.rating = (currentMovie?.vote_average)!!.toFloat()
+                tvMovieDateFav.text = currentMovie?.release_date
+                tvMovieOverviewFav.text = currentMovie?.overview
+                tvMovieRateFav.text = currentMovie?.vote_average.toString()
+                ratingBar.rating = currentMovie?.vote_average!!.toFloat()
             }
         }
     }
@@ -85,6 +84,3 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
 
     override fun getItemCount() = differ.currentList.size
 }
-/*
-https://api.themoviedb.org/3/movie/550?api_key=6f520821cbe7d8a6623235903a2787d5
- */

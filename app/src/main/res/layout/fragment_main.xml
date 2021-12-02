@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:background="@color/backgroundColor"
         tools:context=".ui.MainActivity">
 
@@ -17,7 +17,7 @@
             android:id="@+id/tvPopular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/popular_movies"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -29,13 +29,11 @@
             android:id="@+id/shimmerFrameLayoutPopular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/tvTopRated"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPopular"
-            app:layout_constraintVertical_bias="0.121">
+            app:layout_constraintStart_toStartOf="@id/tvPopular"
+            app:layout_constraintTop_toBottomOf="@id/tvPopular">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,40 +72,36 @@
             android:id="@+id/recyclerViewPopular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/tvTopRated"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPopular"
-            app:layout_constraintVertical_bias="0.121"
             tools:listitem="@layout/popular_movie_list_item" />
 
         <TextView
             android:id="@+id/tvTopRated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/top_rated"
-            android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@id/recyclerViewPopular"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewPopular" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shimmerFrameLayoutPopular" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerFrameLayoutTopRated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvUpComing"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/tvUpComing"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTopRated">
 
@@ -146,17 +140,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTopRated"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:layout_marginBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvUpComing"
+            app:layout_constraintBottom_toTopOf="@id/tvUpComing"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTopRated"
             tools:listitem="@layout/top_rated_movie_list_item" />
@@ -165,21 +157,22 @@
             android:id="@+id/tvUpComing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/upcoming"
-            android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerViewUpComing"
+            app:layout_constraintBottom_toTopOf="@+id/shimmerFrameLayoutUpComing"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewTopRated" />
+            app:layout_constraintTop_toBottomOf="@id/shimmerFrameLayoutTopRated" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerFrameLayoutUpComing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpComing">
@@ -219,18 +212,17 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUpComing"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUpComing"
-            tools:listitem="@layout/top_rated_movie_list_item" />
+            tools:listitem="@layout/upcoming_movie_list_item" />
 
 
         <ProgressBar
@@ -261,6 +253,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/can_t_load_movies"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
