@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/purple_500"
+        android:background="@color/blackColor"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
 

@@ -62,13 +62,9 @@
 
     <TextView
         android:id="@+id/textViewNoResultSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/opacityWhiteColor"
+        style="@style/textViewFragmentMovieSearchStyle"
         android:text="@string/no_results_found"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:visibility="gone"
+        android:textColor="@color/opacityWhiteColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchView"
@@ -76,10 +72,9 @@
 
     <TextView
         android:id="@+id/textViewErrorSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textViewFragmentMovieSearchStyle"
         android:text="@string/can_t_load_movies"
-        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

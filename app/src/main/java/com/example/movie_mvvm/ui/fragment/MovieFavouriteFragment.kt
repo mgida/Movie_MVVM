@@ -53,11 +53,9 @@ class MovieFavouriteFragment : Fragment(R.layout.fragment_movie_favourite),
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
-
                 val swipedMovie = favMovieAdapter.differ.currentList[position]
 
                 viewModel.deleteMovie(swipedMovie)
-
 
                 Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
                     setActionTextColor(Color.parseColor("#f5f3f4"))

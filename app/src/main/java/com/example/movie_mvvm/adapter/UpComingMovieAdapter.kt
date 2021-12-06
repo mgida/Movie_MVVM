@@ -12,7 +12,10 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.databinding.UpcomingMovieListItemBinding
 import com.example.movie_mvvm.utils.Constant
 
-class UpComingMovieAdapter(private val typeface: Typeface,private val listener: OnItemClickListener) :
+class UpComingMovieAdapter(
+    private val typeface: Typeface,
+    private val listener: OnItemClickListener
+) :
     PagingDataAdapter<MovieModel, UpComingMovieAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
     interface OnItemClickListener {
@@ -23,9 +26,10 @@ class UpComingMovieAdapter(private val typeface: Typeface,private val listener: 
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-
-            binding.textViewTitleUpcoming.typeface = typeface
-            binding.textViewDateUpcoming.typeface = typeface
+            binding.includedUpcoming.apply {
+                textViewTitle.typeface = typeface
+                textViewDate.typeface = typeface
+            }
 
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -39,14 +43,14 @@ class UpComingMovieAdapter(private val typeface: Typeface,private val listener: 
         }
 
         fun bind(currentMovie: MovieModel?) {
-            binding.apply {
+            binding.includedUpcoming.apply {
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
                     .error(R.drawable.ic_baseline_image_24)
-                    .into(imageViewUpcoming)
+                    .into(imageView)
 
-                textViewTitleUpcoming.text = currentMovie?.title ?: "venom"
-                textViewDateUpcoming.text = currentMovie?.release_date ?: "10/17"
+                textViewTitle.text = currentMovie?.title ?: "venom"
+                textViewDate.text = currentMovie?.release_date ?: "10/17"
             }
         }
 

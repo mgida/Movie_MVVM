@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.movie_mvvm.R
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
+import com.example.movie_mvvm.utils.Constant.Companion.TRAILER
 import com.example.movie_mvvm.utils.Constant.Companion.YOUTUBE_API_KEY
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -15,7 +16,7 @@ class YoutubeActivity : YouTubeBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube)
 
-        val intent = intent.getParcelableExtra<TrailerModel>("trailerModel")
+        val intent = intent.getParcelableExtra<TrailerModel>(TRAILER)
         val yKey = intent?.key
 
         val ytPlayer = findViewById<YouTubePlayerView>(R.id.ytPlayer)

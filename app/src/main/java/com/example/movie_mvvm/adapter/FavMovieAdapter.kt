@@ -20,16 +20,16 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
         fun onItemClick(movie: MovieModel?)
     }
 
-
     inner class FavMovieViewHolder(private val binding: FavMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-
-            binding.tvMovieTitleFav.typeface = typeface
-            binding.tvMovieDateFav.typeface = typeface
-            binding.tvMovieOverviewFav.typeface = typeface
-            binding.tvMovieRateFav.typeface = typeface
+            binding.includedFav.apply {
+                tvMovieTitle.typeface = typeface
+                tvMovieDate.typeface = typeface
+                tvMovieOverview.typeface = typeface
+                tvMovieRate.typeface = typeface
+            }
 
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -43,16 +43,16 @@ class FavMovieAdapter(private val typeface: Typeface, private val listener: OnIt
         }
 
         fun bind(currentMovie: MovieModel?) {
-            binding.apply {
+            binding.includedFav.apply {
 
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
                     .error(R.drawable.ic_baseline_image_24)
-                    .into(imageViewFav)
-                tvMovieTitleFav.text = currentMovie?.original_title
-                tvMovieDateFav.text = currentMovie?.release_date
-                tvMovieOverviewFav.text = currentMovie?.overview
-                tvMovieRateFav.text = currentMovie?.vote_average.toString()
+                    .into(imageView)
+                tvMovieTitle.text = currentMovie?.original_title
+                tvMovieDate.text = currentMovie?.release_date
+                tvMovieOverview.text = currentMovie?.overview
+                tvMovieRate.text = currentMovie?.vote_average.toString()
                 ratingBar.rating = currentMovie?.vote_average!!.toFloat()
             }
         }

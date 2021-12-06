@@ -1,50 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="200dp"
-    android:layout_marginTop="8dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical">
+    android:layout_marginTop="8dp"
+    android:background="@color/backgroundColor">
 
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="130dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="12dp">
-
-        <ImageView
-            android:id="@+id/imageViewUpcoming"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/backgroundColor"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop" />
-
-    </androidx.cardview.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/textViewTitleUpcoming"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:maxEms="1"
-        android:maxLines="2"
-        android:textColor="@color/white"
-        tools:text="@string/fake_title" />
-
-    <TextView
-        android:id="@+id/textViewDateUpcoming"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/opacityWhiteColor"
-        android:alpha="0.7"
-        tools:text="@string/fake_date" />
-
-</LinearLayout>
+    <include
+        android:id="@+id/includedUpcoming"
+        layout="@layout/top_rated_and_upcoming_movie_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

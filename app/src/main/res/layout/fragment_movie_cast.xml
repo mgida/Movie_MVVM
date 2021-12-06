@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <ImageView
@@ -24,9 +23,7 @@
 
         <TextView
             android:id="@+id/textViewCastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            style="@style/textViewCastDetailStyle"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -43,9 +40,7 @@
 
         <TextView
             android:id="@+id/textViewCharacter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            style="@style/textViewCastDetailStyle"
             android:alpha="0.7"
             android:textColor="@color/opacityWhiteColor"
             android:textSize="18sp"
@@ -53,9 +48,7 @@
 
         <TextView
             android:id="@+id/textViewCastBirthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            style="@style/textViewCastDetailStyle"
             android:alpha="0.7"
             android:textColor="@color/opacityWhiteColor"
             android:textSize="18sp"
@@ -63,9 +56,7 @@
 
         <TextView
             android:id="@+id/textViewCastBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            style="@style/textViewCastDetailStyle"
             android:alpha="0.7"
             android:textColor="@color/opacityWhiteColor"
             android:textSize="18sp"

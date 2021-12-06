@@ -15,13 +15,14 @@ class MovieReviewAdapter(private val typeface: Typeface) :
     inner class MovieReviewViewHolder(private val binding: MovieReviewListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.textViewReview.typeface = typeface
-            binding.textViewReviewAuthor.typeface = typeface
+            binding.apply {
+                textViewReview.typeface = typeface
+                textViewReviewAuthor.typeface = typeface
+            }
         }
 
         fun bind(movieReview: ReviewModel) {
             binding.apply {
-
                 textViewReview.text = movieReview.content
                 textViewReviewAuthor.text = movieReview.author
             }

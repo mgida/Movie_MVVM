@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.MovieTrailerListItemBinding
 
-class MovieTrailerAdapter(private val typeface: Typeface,private val listener: OnItemClickListener) :
+class MovieTrailerAdapter(
+    private val typeface: Typeface,
+    private val listener: OnItemClickListener
+) :
     RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerViewHolder>() {
 
     interface OnItemClickListener {
@@ -38,7 +41,6 @@ class MovieTrailerAdapter(private val typeface: Typeface,private val listener: O
             binding.apply {
 
                 textViewTrailerName.text = trailerModel?.name
-               // textViewTrailerSite.text = trailerModel?.site
             }
         }
     }

@@ -8,18 +8,16 @@
 
     <TextView
         android:id="@+id/textViewReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textViewReviewItemStyle"
         android:layout_marginBottom="2dp"
-        android:textColor="@color/opacityWhiteColor"
+        android:alpha="0.7"
         tools:text="nice movie" />
 
     <TextView
         android:id="@+id/textViewReviewAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textViewReviewItemStyle"
         android:layout_marginBottom="8dp"
-        android:textColor="@color/opacityWhiteColor"
+        android:alpha="0.7"
         tools:text="tom hanks" />
 
     <View

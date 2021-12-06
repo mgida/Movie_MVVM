@@ -26,9 +26,10 @@ class TopRatedMovieAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.textViewTitleTopRated.typeface = typeface
-            binding.textViewDateTopRated.typeface = typeface
-
+            binding.includedTopRated.apply {
+                textViewTitle.typeface = typeface
+                textViewDate.typeface = typeface
+            }
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -42,14 +43,14 @@ class TopRatedMovieAdapter(
 
 
         fun bind(currentMovie: MovieModel?) {
-            binding.apply {
+            binding.includedTopRated.apply {
                 Glide.with(itemView)
                     .load("${Constant.IMAGE_URL}${currentMovie?.poster_path}")
                     .error(R.drawable.ic_baseline_image_24)
-                    .into(imageViewTopRated)
+                    .into(imageView)
 
-                textViewTitleTopRated.text = currentMovie?.title ?: "venom"
-                textViewDateTopRated.text = currentMovie?.release_date ?: "10/17"
+                textViewTitle.text = currentMovie?.title ?: "venom"
+                textViewDate.text = currentMovie?.release_date ?: "10/17"
 
             }
         }

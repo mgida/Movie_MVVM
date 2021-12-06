@@ -24,9 +24,9 @@ class MovieCastAdapter(private val typeface: Typeface, private val listener: OnI
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-
-            binding.textViewTitleCast.typeface = typeface
-            binding.textViewPopularityCast.typeface = typeface
+            binding.apply {
+                textViewTitleCast.typeface = typeface
+            }
 
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -47,7 +47,6 @@ class MovieCastAdapter(private val typeface: Typeface, private val listener: OnI
                     .into(ivCast)
 
                 textViewTitleCast.text = castModel?.original_name
-                textViewPopularityCast.text = castModel?.popularity.toString()
             }
         }
     }

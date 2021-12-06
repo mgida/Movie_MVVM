@@ -25,11 +25,12 @@ class SearchMovieAdapter(
     inner class MovieViewHolder(private val binding: SearchMovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.tvMovieTitle.typeface = typeface
-            binding.tvMovieDate.typeface = typeface
-            binding.tvMovieOverview.typeface = typeface
-            binding.tvMovieRate.typeface = typeface
-
+            binding.includedSearch.apply {
+                tvMovieTitle.typeface = typeface
+                tvMovieDate.typeface = typeface
+                tvMovieOverview.typeface = typeface
+                tvMovieRate.typeface = typeface
+            }
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -39,18 +40,16 @@ class SearchMovieAdapter(
                     }
                 }
             }
-
-
         }
 
         fun bind(currentMovie: MovieModel?) {
 
-            binding.apply {
+            binding.includedSearch.apply {
                 Glide.with(itemView)
                     .load("$IMAGE_URL${currentMovie?.poster_path}")
-                    .placeholder(R.color.purple_500)
+                    .placeholder(R.color.blackColor)
                     .error(R.drawable.ic_baseline_image_24)
-                    .into(imageViewSearch)
+                    .into(imageView)
                 tvMovieTitle.text = currentMovie?.original_title
                 tvMovieDate.text = currentMovie?.release_date
                 tvMovieOverview.text = currentMovie?.overview

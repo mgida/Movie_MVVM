@@ -23,6 +23,7 @@ import com.example.movie_mvvm.databinding.FragmentMovieDetailBinding
 import com.example.movie_mvvm.ui.YoutubeActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
+import com.example.movie_mvvm.utils.Constant.Companion.TRAILER
 import com.example.movie_mvvm.utils.DataState
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +42,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     private lateinit var castAdapter: MovieCastAdapter
     private lateinit var trailerAdapter: MovieTrailerAdapter
     private lateinit var typeface: Typeface
+    private var toast: Toast? = null
 
     private var isFav = false
     private var idObserved = MutableLiveData<Int>()
@@ -51,7 +53,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieDetailBinding.bind(view)
         typeface = Typeface.createFromAsset(requireActivity().assets, Constant.AntiqueFont)
-
         detailedMovie = args.movie
         idObserved.postValue(detailedMovie.id)
 
@@ -104,11 +105,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
         isFav = true
         viewModel.insertMovie(selectedMovie)
         binding.ivFav.setImageResource(R.drawable.ic_baseline_favorite_fill)
-        showToastMessage(message = "saved Successfully")
+        showToastMessage(message = "Saved Successfully")
     }
 
     private fun showToastMessage(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+        if (toast != null) {
+            toast?.cancel()
+        }
+        toast = Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 
     private fun observeTrailers() {
@@ -268,17 +273,19 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     }
 
     private fun applyCustomFont() {
-        binding.textViewReviewLabel.typeface = typeface
-        binding.textViewCastLabel.typeface = typeface
-        binding.textViewTrailerLabel.typeface = typeface
-        binding.textViewTitleDetail.typeface = typeface
-        binding.textViewDateDetail.typeface = typeface
-        binding.expandableText.typeface = typeface
+        binding.apply {
+            textViewReviewLabel.typeface = typeface
+            textViewCastLabel.typeface = typeface
+            textViewTrailerLabel.typeface = typeface
+            textViewTitleDetail.typeface = typeface
+            textViewDateDetail.typeface = typeface
+            expandableText.typeface = typeface
+        }
     }
 
     override fun onItemClick(trailerModel: TrailerModel?) {
         val intent = Intent(activity, YoutubeActivity::class.java)
-        intent.putExtra("trailerModel", trailerModel)
+        intent.putExtra(TRAILER, trailerModel)
         startActivity(intent)
     }
 

@@ -25,6 +25,7 @@ import com.example.movie_mvvm.utils.Constant.Companion.AntiqueFont
 import com.example.movie_mvvm.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainFragment :
     Fragment(R.layout.fragment_main),
@@ -46,7 +47,6 @@ class MainFragment :
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentMainBinding.bind(view)
-
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.elevation = 0F
 

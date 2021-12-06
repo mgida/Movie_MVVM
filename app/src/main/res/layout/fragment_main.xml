@@ -15,13 +15,8 @@
 
         <TextView
             android:id="@+id/tvPopular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif-condensed-medium"
+            style="@style/textViewFragmentMainLabelsStyle"
             android:text="@string/popular_movies"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,12 +65,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPopular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/recyclerViewFragmentMainStyle"
             android:layout_marginBottom="16dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/tvTopRated"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,13 +76,8 @@
 
         <TextView
             android:id="@+id/tvTopRated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="sans-serif-condensed-medium"
+            style="@style/textViewFragmentMainLabelsStyle"
             android:text="@string/top_rated"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shimmerFrameLayoutPopular" />
 
@@ -140,12 +126,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewTopRated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/recyclerViewFragmentMainStyle"
             android:layout_marginBottom="8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/tvUpComing"
             app:layout_constraintEnd_toEndOf="parent"
@@ -155,15 +137,10 @@
 
         <TextView
             android:id="@+id/tvUpComing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            style="@style/textViewFragmentMainLabelsStyle"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
-            android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/upcoming"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/shimmerFrameLayoutUpComing"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shimmerFrameLayoutTopRated" />
@@ -212,12 +189,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUpComing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/recyclerViewFragmentMainStyle"
             android:layout_marginBottom="8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -227,9 +200,7 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
+            style="@style/AppProgressBarStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -254,7 +225,7 @@
             android:layout_height="wrap_content"
             android:text="@string/can_t_load_movies"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white"
+            android:textColor="@android:color/holo_red_dark"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
