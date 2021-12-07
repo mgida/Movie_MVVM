@@ -27,4 +27,8 @@
 
 ![4](https://user-images.githubusercontent.com/38481452/145023649-741e619c-afc4-4b6e-b563-dfdf61b587cf.PNG)![5](https://user-images.githubusercontent.com/38481452/145023656-fee5a1a6-f833-4b05-ba91-563670d2332c.PNG)![6](https://user-images.githubusercontent.com/38481452/145023662-051312a1-e571-4739-b62b-f115bc847f1a.PNG)
 
-![7](https://user-images.githubusercontent.com/38481452/145023667-24bff0c2-b6b2-40ee-b129-107b82a23304.PNG)![8](https://user-images.githubusercontent.com/38481452/145023677-89df0390-9b3e-4212-91eb-b9c011571a91.PNG)![9](https://user-images.githubusercontent.com/38481452/145023682-11fb867f-d497-492f-b041-691d063bd754.PNG)
+![7](https://user-images.githubusercontent.com/38481452/145023985-155ee10e-709e-490b-bc5a-d8a41cca3157.PNG)![8](https://user-images.githubusercontent.com/38481452/145023677-89df0390-9b3e-4212-91eb-b9c011571a91.PNG)![9](https://user-images.githubusercontent.com/38481452/145023682-11fb867f-d497-492f-b041-691d063bd754.PNG)
+
+```python
+NOTE : to get started put your API_Key & Youtube_API_key in utils/Constants class before you run the app.
+
