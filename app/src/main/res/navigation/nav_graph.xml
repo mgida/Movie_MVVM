@@ -9,34 +9,46 @@
         android:id="@+id/mainFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MainFragment"
         android:label="IMDB"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_movieSearchFragment"
             app:destination="@id/movieSearchFragment" />
         <action
             android:id="@+id/action_mainFragment_to_movieFavouriteFragment"
-            app:destination="@id/movieFavouriteFragment" />
+            app:destination="@id/movieFavouriteFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieDetailFragment"
         android:label="Movie Detail"
-        tools:layout="@layout/fragment_movie_detail" >
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie"
             app:argType="com.example.movie_mvvm.data.model.MovieModel" />
         <action
             android:id="@+id/action_movieDetailFragment_to_movieCastFragment"
-            app:destination="@id/movieCastFragment" />
+            app:destination="@id/movieCastFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/movieCastFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieCastFragment"
         android:label="Cast Detail"
-        tools:layout="@layout/fragment_movie_cast" >
+        tools:layout="@layout/fragment_movie_cast">
         <argument
             android:name="cast"
             app:argType="com.example.movie_mvvm.data.model.cast.CastModel" />
@@ -45,7 +57,7 @@
         android:id="@+id/movieSearchFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieSearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_movie_search" >
+        tools:layout="@layout/fragment_movie_search">
         <action
             android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
@@ -54,7 +66,7 @@
         android:id="@+id/movieFavouriteFragment"
         android:name="com.example.movie_mvvm.ui.fragment.MovieFavouriteFragment"
         android:label="Favourites"
-        tools:layout="@layout/fragment_movie_favourite" >
+        tools:layout="@layout/fragment_movie_favourite">
         <action
             android:id="@+id/action_movieFavouriteFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />

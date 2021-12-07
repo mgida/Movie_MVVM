@@ -22,7 +22,6 @@
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription" />
 
-
     </androidx.cardview.widget.CardView>
 
     <TextView

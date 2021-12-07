@@ -30,6 +30,7 @@ class MovieCastFragment : Fragment(R.layout.fragment_movie_cast) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         _binding = FragmentMovieCastBinding.bind(view)
         typeface = Typeface.createFromAsset(requireActivity().assets, AntiqueFont)
 

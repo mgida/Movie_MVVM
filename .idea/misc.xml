@@ -14,16 +14,17 @@
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/drawable/ic_baseline_video_library_24.xml" value="0.2203125" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/activity_splash.xml" value="0.1947463768115942" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/activity_youtube.xml" value="0.9274193548387096" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/custom_app_bar.xml" value="0.25" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fake_test.xml" value="0.1453804347826087" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fav_movie_list_item.xml" value="0.25" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_main.xml" value="0.22" />
-        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_cast.xml" value="0.33" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_cast.xml" value="0.25" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_detail.xml" value="0.22" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_favourite.xml" value="0.33" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/fragment_movie_search.xml" value="0.33" />
-        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_cast_list_item.xml" value="0.17617753623188406" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_cast_list_item.xml" value="0.1" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_item.xml" value="0.22" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_load_state_adapter_footer.xml" value="0.33" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/movie_review_list_item.xml" value="0.33" />
@@ -33,7 +34,7 @@
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/search_and_fav_movie_item.xml" value="0.5541871921182266" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/search_movie_list_item.xml" value="0.18" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/shimmer_popular_movie_list_item.xml" value="0.16394927536231885" />
-        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/shimmer_top_rated_and_upcoming_movie_list_item.xml" value="0.9314516129032258" />
+        <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/shimmer_top_rated_and_upcoming_movie_list_item.xml" value="0.22" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/shimmer_top_rated_movie_list_item.xml" value="0.5" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/top_rated_and_upcoming_movie_item.xml" value="0.15760869565217392" />
         <entry key="..\:/nanodegree/Expanding/projects/Movie_MVVM/app/src/main/res/layout/top_rated_movie_list_item.xml" value="0.5" />

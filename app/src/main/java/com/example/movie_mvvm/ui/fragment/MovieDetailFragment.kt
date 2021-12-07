@@ -20,7 +20,7 @@ import com.example.movie_mvvm.data.model.MovieModel
 import com.example.movie_mvvm.data.model.cast.CastModel
 import com.example.movie_mvvm.data.model.trailer.TrailerModel
 import com.example.movie_mvvm.databinding.FragmentMovieDetailBinding
-import com.example.movie_mvvm.ui.YoutubeActivity
+import com.example.movie_mvvm.ui.activity.YoutubeActivity
 import com.example.movie_mvvm.utils.Constant
 import com.example.movie_mvvm.utils.Constant.Companion.TAG
 import com.example.movie_mvvm.utils.Constant.Companion.TRAILER
@@ -292,6 +292,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail),
     override fun onItemClick(castModel: CastModel?) {
         val action =
             MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieCastFragment(castModel!!)
+
         findNavController().navigate(action)
     }
 
